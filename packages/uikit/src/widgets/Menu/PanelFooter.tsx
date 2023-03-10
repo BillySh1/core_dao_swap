@@ -1,16 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { CogIcon, SvgProps } from "../../components/Svg";
-import Text from "../../components/Text/Text";
+import Button from "../../components/Button/Button";
+import IconButton from "../../components/Button/IconButton";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import Link from "../../components/Link/Link";
 import Skeleton from "../../components/Skeleton/Skeleton";
-import Button from "../../components/Button/Button";
-import IconButton from "../../components/Button/IconButton";
-import MenuButton from "./MenuButton";
-import { ThemeSwitcher } from "../../components/ThemeSwitcher";
+import { CogIcon, SvgProps } from "../../components/Svg";
+import Text from "../../components/Text/Text";
+import { MENU_ENTRY_HEIGHT, socials } from "./config";
 import * as IconModule from "./icons";
-import { socials, MENU_ENTRY_HEIGHT } from "./config";
+import MenuButton from "./MenuButton";
 import { PanelProps, PushedProps } from "./types";
 
 interface Props extends PanelProps, PushedProps {}
@@ -121,7 +120,7 @@ const PanelFooter: React.FC<Props> = ({
       </SocialEntry>
       <SettingsEntry>
         <div></div>
-        <ThemeSwitcher isDark={isDark} toggleTheme={toggleTheme} />
+        {/* <ThemeSwitcher isDark={isDark} toggleTheme={toggleTheme} /> */}
         <Dropdown
           position="top-right"
           target={

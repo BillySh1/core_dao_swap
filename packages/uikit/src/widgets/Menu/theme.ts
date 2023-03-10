@@ -6,7 +6,7 @@ export interface NavThemeType {
 }
 
 export const light: NavThemeType = {
-  topbar: '#B7D4F4',
+  topbar: '#EAEAEA',
   background: lightColors.backgroundNav,
 };
 
