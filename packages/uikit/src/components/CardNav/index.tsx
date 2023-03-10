@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 import { ButtonMenu, ButtonMenuItem } from "../ButtonMenu";
 
 const StyledNav = styled.div`
@@ -20,7 +20,7 @@ function CardNav({ activeIndex = 0 }: { activeIndex?: number }) {
         <ButtonMenuItem
           id="pool-nav-link"
           as="a"
-          href="https://defi.swft.pro?sourceFlag=memory"
+          href="/"
           target="_blank"
           rel="noreferrer noopener"
         >

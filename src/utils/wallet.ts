@@ -8,11 +8,11 @@ import { nodes } from './getRpcUrl'
 
 const NETWORK_CONFIG = {
   [ChainId.MAINNET]: {
-    name: 'EthereumFair',
+    name: 'Core',
     scanURL: BASE_BSC_SCAN_URLS[ChainId.MAINNET],
   },
   [ChainId.TESTNET]: {
-    name: 'EthereumFair',
+    name: 'Core',
     scanURL: BASE_BSC_SCAN_URLS[ChainId.TESTNET],
   },
 }
