@@ -3,7 +3,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_mdao",
+        "name": "_CDAO",
         "type": "address"
       },
       {
@@ -179,7 +179,7 @@
   },
   {
     "inputs": [],
-    "name": "MDAO",
+    "name": "CDAO",
     "outputs": [
       {
         "internalType": "contract IERC20",
@@ -192,10 +192,10 @@
   },
   {
     "inputs": [],
-    "name": "MDAO_USDT_PAIR",
+    "name": "CDAO_USDT_PAIR",
     "outputs": [
       {
-        "internalType": "contract IMdaoPair",
+        "internalType": "contract ICDAOPair",
         "name": "",
         "type": "address"
       }

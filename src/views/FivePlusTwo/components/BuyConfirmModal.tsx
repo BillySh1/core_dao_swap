@@ -1,46 +1,32 @@
-import { useEffect, useState, useMemo, useCallback } from 'react'
-import styled from 'styled-components'
-import BigNumber from 'bignumber.js'
-import { requiresApproval } from 'utils/requiresApproval'
 import { MaxUint256 } from '@ethersproject/constants'
+import { formatUnits } from '@ethersproject/units'
 import {
-  Modal,
-  Text,
-  Flex,
-  HelpIcon,
-  BalanceInput,
-  Ticket,
-  useTooltip,
-  Skeleton,
-  Button,
-  ArrowForwardIcon,
-  Input,
+    Flex, Input, Modal,
+    Text, useTooltip
 } from '@pancakeswap/uikit'
-import { useTranslation } from 'contexts/Localization'
 import { useWeb3React } from '@web3-react/core'
-import tokens from 'config/constants/tokens'
-import { getFullDisplayBalance } from 'utils/formatBalance'
-import { BIG_ZERO } from 'utils/bigNumber'
-import { useAppDispatch } from 'state'
-import { usePriceCakeBusd } from 'state/farms/hooks'
-import { useLottery } from 'state/lottery/hooks'
-import { fetchUserTicketsAndLotteries } from 'state/lottery'
-import useTheme from 'hooks/useTheme'
-import useTokenBalance from 'hooks/useTokenBalance'
-import { FetchStatus } from 'config/constants/types'
-import useApproveConfirmTransaction from 'hooks/useApproveConfirmTransaction'
-import { useCake, useFivePlusTwo, useLotteryV2Contract, useMdao } from 'hooks/useContract'
-import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
-import useToast from 'hooks/useToast'
+import BigNumber from 'bignumber.js'
+import ApproveConfirmButtons, { ButtonArrangement } from 'components/ApproveConfirmButtons'
 import ConnectWalletButton from 'components/ConnectWalletButton'
 import { ToastDescriptionWithTx } from 'components/Toast'
-import ApproveConfirmButtons, { ButtonArrangement } from 'components/ApproveConfirmButtons'
-import { useTicketsReducer } from 'views/Lottery/components/BuyTicketsModal/useTicketsReducer'
-import EditNumbersModal from 'views/Lottery/components/BuyTicketsModal/EditNumbersModal'
-import NumTicketsToBuyButton from 'views/Lottery/components/BuyTicketsModal/NumTicketsToBuyButton'
-import NumberCom from './NumberCom'
+import tokens from 'config/constants/tokens'
+import { FetchStatus } from 'config/constants/types'
+import { useTranslation } from 'contexts/Localization'
+import useApproveConfirmTransaction from 'hooks/useApproveConfirmTransaction'
+import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
+import { useCDAO } from 'hooks/useContract'
+import useTheme from 'hooks/useTheme'
+import useToast from 'hooks/useToast'
+import useTokenBalance from 'hooks/useTokenBalance'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useAsync } from 'react-use'
-import { formatUnits, parseUnits } from '@ethersproject/units'
+import { useAppDispatch } from 'state'
+import { fetchUserTicketsAndLotteries } from 'state/lottery'
+import { useLottery } from 'state/lottery/hooks'
+import styled from 'styled-components'
+import { BIG_ZERO } from 'utils/bigNumber'
+import { requiresApproval } from 'utils/requiresApproval'
+import NumberCom from './NumberCom'
 
 const StyledModal = styled(Modal)`
   min-width: 280px;
@@ -87,7 +73,7 @@ const BuyConfirmModal: React.FC<BuyTicketsModalProps> = ({ onDismiss, frontNumbe
   const [maxTicketPurchaseExceeded, setMaxTicketPurchaseExceeded] = useState(false)
   const [buyToAddress, setBuyToAddress] = useState(account)
   const [userNotEnoughCake, setUserNotEnoughCake] = useState(false)
-  const { reader: mdaoContractReader, signer: mdaoContractApprover } = useMdao()
+  const { reader: CDAOContractReader, signer: CDAOContractApprover } = useCDAO()
   const { toastSuccess } = useToast()
   const { balance: userCake, fetchStatus } = useTokenBalance(tokens.cake.address)
   // balance from useTokenBalance causes rerenders in effects as a new BigNumber is instantiated on each render, hence memoising it using the stringified value below.
@@ -215,10 +201,10 @@ const BuyConfirmModal: React.FC<BuyTicketsModalProps> = ({ onDismiss, frontNumbe
   const { isApproving, isApproved, isConfirmed, isConfirming, handleApprove, handleConfirm } =
     useApproveConfirmTransaction({
       onRequiresApproval: async () => {
-        return requiresApproval(mdaoContractReader, account, contract.address)
+        return requiresApproval(CDAOContractReader, account, contract.address)
       },
       onApprove: () => {
-        return callWithGasPrice(mdaoContractApprover, 'approve', [contract.address, MaxUint256])
+        return callWithGasPrice(CDAOContractApprover, 'approve', [contract.address, MaxUint256])
       },
       onApproveSuccess: async ({ receipt }) => {
         toastSuccess(
@@ -285,10 +271,10 @@ const BuyConfirmModal: React.FC<BuyTicketsModalProps> = ({ onDismiss, frontNumbe
       <Flex flexDirection="column">
         <Flex mb="8px" justifyContent="space-between">
           <Text color="textSubtle" fontSize="14px">
-            {t('Cost')} (MDAO)
+            {t('Cost')} (CDAO)
           </Text>
           <Text color="textSubtle" fontSize="14px">
-            {priceSingleLottery} MDAO
+            {priceSingleLottery} CDAO
           </Text>
         </Flex>
 
@@ -297,7 +283,7 @@ const BuyConfirmModal: React.FC<BuyTicketsModalProps> = ({ onDismiss, frontNumbe
             {t('You pay')}
           </Text>
           <Text fontSize="16px" bold>
-            ~{totalCost} MDAO
+            ~{totalCost} CDAO
           </Text>
         </Flex>
 

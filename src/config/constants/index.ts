@@ -1,5 +1,5 @@
-import { ChainId, JSBI, Percent, Token } from '@pancakeswap/sdk'
 import { BigNumber } from '@ethersproject/bignumber'
+import { ChainId, JSBI, Percent, Token } from '@pancakeswap/sdk'
 import { mainnetTokens, testnetTokens } from './tokens'
 
 export const ROUTER_ADDRESS = {
@@ -26,7 +26,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     mainnetTokens.eth,
     mainnetTokens.usdc,
   ],
-  [ChainId.TESTNET]: [testnetTokens.wethf, testnetTokens.mdao, testnetTokens.usdt],
+  [ChainId.TESTNET]: [testnetTokens.wethf, testnetTokens.CDAO, testnetTokens.usdt],
 }
 
 /**
@@ -49,13 +49,13 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
   [ChainId.MAINNET]: [mainnetTokens.busd, mainnetTokens.cake, mainnetTokens.btcb],
-  [ChainId.TESTNET]: [testnetTokens.wethf, testnetTokens.usdt, testnetTokens.mdao],
+  [ChainId.TESTNET]: [testnetTokens.wethf, testnetTokens.usdt, testnetTokens.CDAO],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   [ChainId.MAINNET]: [mainnetTokens.wbnb, mainnetTokens.dai, mainnetTokens.busd, mainnetTokens.usdt],
-  [ChainId.TESTNET]: [testnetTokens.wethf, testnetTokens.usdt, testnetTokens.mdao],
+  [ChainId.TESTNET]: [testnetTokens.wethf, testnetTokens.usdt, testnetTokens.CDAO],
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
@@ -104,8 +104,8 @@ export const BLOCKED_ADDRESSES: string[] = [
 ]
 
 export { default as farmsConfig } from './farms'
-export { default as poolsConfig } from './pools'
 export { default as ifosConfig } from './ifo'
+export { default as poolsConfig } from './pools'
 
 export const FAST_INTERVAL = 10000
 export const SLOW_INTERVAL = 60000

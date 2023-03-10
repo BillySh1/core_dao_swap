@@ -1,4 +1,4 @@
-import { TxMiningIcon, IconButton } from '@pancakeswap/uikit'
+import { IconButton } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 import styled from 'styled-components'
 
@@ -18,13 +18,8 @@ const RoundBox = styled.div<{ isMobile }>`
   justify-content: space-between;
   border-radius: 35px;
   font-weight: 800;
-  border: 2px solid transparent;
-  background-image: ${({ theme }) =>
-      theme.isDark ? 'linear-gradient(#3E3D5B,#3E3D5B)' : 'linear-gradient(#B3D2F5,#B3D2F5)'},
-    linear-gradient(90deg, #ffffff 1.47%, #007be4 100%);
-  background-origin: border-box;
-
-  background-clip: padding-box, border-box;
+  border: 2px solid #3a2f7b;
+  background: transparent;
 
   padding: 6px 16px;
   box-sizing: border-box;
@@ -45,9 +40,7 @@ export const TxMining = ({ isMobile }: { isMobile?: boolean }) => {
   return (
     <Wrapper>
       <RoundBox isMobile={isMobile} style={{ borderRadius: !isMobile ? '35px' : '15px' }}>
-        <Intro>
-          {t('Trade Mining Reward')} 0.0000 MDAO
-        </Intro>
+        <Intro>{t('Trade Mining Reward')} 0.0000 CDAO</Intro>
         <IconButton style={{ width: 'unset', borderRadius: 35, padding: '12px 16px', fontSize: 14, height: 'unset' }}>
           <span>{t('Claim')}</span>
           {/* <TxMiningIcon color="invertedContrast" /> */}

@@ -16,7 +16,7 @@
       "address": "0x3bdB1dD1eB0034D231B3e62fA0D98f1e4bf53AdD",
       "chainId": 513100,
       "decimals": 18,
-      "logoURI": "https://ethf.mdaoswap.com/FDAO.png"
+      "logoURI": "https://ethf.CDAOswap.com/FDAO.png"
     },
     {
       "name": "RICHMOON",
@@ -24,7 +24,7 @@
       "address": "0x93A06C8CE53AF3EE8F7A06200a42BF963b9Dd719",
       "chainId": 513100,
       "decimals": 18,
-      "logoURI": "https://ethf.mdaoswap.com/rmn.jpg"
+      "logoURI": "https://ethf.CDAOswap.com/rmn.jpg"
     },
     {
       "name": "Wrapped Ethereum",
@@ -40,7 +40,7 @@
       "address": "0x7127deeff734cE589beaD9C4edEFFc39C9128771",
       "chainId": 513100,
       "decimals": 18,
-      "logoURI": "https://ethf.mdaoswap.com/fren.jpg"
+      "logoURI": "https://ethf.CDAOswap.com/fren.jpg"
     },
     {
       "name": "Ethereum",

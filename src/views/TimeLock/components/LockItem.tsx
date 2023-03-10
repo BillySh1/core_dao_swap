@@ -1,18 +1,18 @@
-import { TokenImage } from 'components/TokenImage'
-import styled from 'styled-components'
-import { Fetcher, WETH } from '@pancakeswap/sdk'
-import { Button, TimeLockIcon } from '@pancakeswap/uikit'
-import TimeCards from './TImeCards'
-import { useEffect, useState } from 'react'
-import useTheme from 'hooks/useTheme'
 import { formatEther } from '@ethersproject/units'
+import { WETH } from '@pancakeswap/sdk'
+import { Button, TimeLockIcon } from '@pancakeswap/uikit'
+import { TokenImage } from 'components/TokenImage'
+import { useTranslation } from 'contexts/Localization'
+import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import useCatchTxError from 'hooks/useCatchTxError'
 import { useERC20, useTimeLocker } from 'hooks/useContract'
-import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
+import useTheme from 'hooks/useTheme'
 import useToast from 'hooks/useToast'
-import SteamIcon from '../assets/steam'
-import { useTranslation } from 'contexts/Localization'
+import { useEffect, useState } from 'react'
 import { useAsync } from 'react-use'
+import styled from 'styled-components'
+import SteamIcon from '../assets/steam'
+import TimeCards from './TImeCards'
 
 const Wrapper = styled.div`
   position: relative;
@@ -173,7 +173,7 @@ export function LockItem(props: LockItemProps) {
       </div>
       <InfoItem>
         <div>{t('LockUpQuanity')}</div>
-        <div> {lockInfo.amount} MDAO</div>
+        <div> {lockInfo.amount} CDAO</div>
       </InfoItem>
       <InfoItem style={{ color: color.theme.colors.primary }}>
         <div>{t('LockUpTime')}</div>

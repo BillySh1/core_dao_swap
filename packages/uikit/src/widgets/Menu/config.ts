@@ -87,18 +87,18 @@ export const socials = [
     items: [
       {
         label: "English",
-        href: "https://t.me/Memory_Swap",
+        href: "https://t.me/coreDaoSwap_cn",
       },
       {
         label: "简体中文",
-        href: "https://t.me/MemorySwapDao",
+        href: "https://t.me/coreDaoSwap_cn",
       },
     ],
   },
   {
     label: "Twitter",
     icon: "TwitterIcon",
-    href: "https://twitter.com/Memory_Labs?s=09",
+    href: "https://twitter.com/CoreDaoSwap?s=09",
   },
 ];
 

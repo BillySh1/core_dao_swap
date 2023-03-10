@@ -1,136 +1,70 @@
 import type { Signer } from '@ethersproject/abstract-signer'
-import type { Provider } from '@ethersproject/providers'
 import { Contract } from '@ethersproject/contracts'
-import { simpleRpcProvider } from 'utils/providers'
+import type { Provider } from '@ethersproject/providers'
 import poolsConfig from 'config/constants/pools'
-import { PoolCategory } from 'config/constants/types'
 import tokens from 'config/constants/tokens'
+import { PoolCategory } from 'config/constants/types'
+import { simpleRpcProvider } from 'utils/providers'
 
 // Addresses
 import {
-  getAddress,
-  getPancakeProfileAddress,
-  getPancakeBunniesAddress,
-  getBunnyFactoryAddress,
-  getBunnySpecialAddress,
-  getLotteryV2Address,
-  getMasterChefAddress,
-  getMasterChefV1Address,
-  getPointCenterIfoAddress,
-  getClaimRefundAddress,
-  getTradingCompetitionAddress,
-  getEasterNftAddress,
-  getCakeVaultAddress,
-  getPredictionsAddress,
-  getChainlinkOracleAddress,
-  getMulticallAddress,
-  getBunnySpecialCakeVaultAddress,
-  getBunnySpecialPredictionAddress,
-  getBunnySpecialLotteryAddress,
-  getFarmAuctionAddress,
-  getAnniversaryAchievement,
-  getNftMarketAddress,
-  getNftSaleAddress,
-  getPancakeSquadAddress,
-  getTradingCompetitionAddressV2,
-  getTradingCompetitionAddressMobox,
-  getBunnySpecialXmasAddress,
-  getGalaxyNFTClaimingAddress,
-  getFactoryAddress,
-  getTimeLockerAddress,
-  getFivePlusTwoAddress,
-  getXENAddress,
-  getDonateAddress,
-  getDonate2Address,
-  getDonateRMAddress,
-  getDonateETHFAddress,
-  getWLDonateFAddress,
-  getFDAOClaimAddress,
+    getAddress, getAnniversaryAchievement, getBunnyFactoryAddress,
+    getBunnySpecialAddress, getBunnySpecialCakeVaultAddress, getBunnySpecialLotteryAddress, getBunnySpecialPredictionAddress, getBunnySpecialXmasAddress, getCakeVaultAddress, getChainlinkOracleAddress, getClaimRefundAddress, getDonate2Address, getDonateAddress, getDonateETHFAddress, getDonateRMAddress, getEasterNftAddress, getFactoryAddress, getFarmAuctionAddress, getFDAOClaimAddress, getFivePlusTwoAddress, getGalaxyNFTClaimingAddress, getLotteryV2Address,
+    getMasterChefAddress,
+    getMasterChefV1Address, getMulticallAddress, getNftMarketAddress,
+    getNftSaleAddress, getPancakeBunniesAddress, getPancakeProfileAddress, getPancakeSquadAddress, getPointCenterIfoAddress, getPredictionsAddress, getTimeLockerAddress, getTradingCompetitionAddress, getTradingCompetitionAddressMobox, getTradingCompetitionAddressV2, getWLDonateFAddress, getXENAddress
 } from 'utils/addressHelpers'
 
 // ABI
-import profileABI from 'config/abi/pancakeProfile.json'
-import pancakeBunniesAbi from 'config/abi/pancakeBunnies.json'
+import anniversaryAchievementAbi from 'config/abi/anniversaryAchievement.json'
 import bunnyFactoryAbi from 'config/abi/bunnyFactory.json'
 import bunnySpecialAbi from 'config/abi/bunnySpecial.json'
+import bunnySpecialCakeVaultAbi from 'config/abi/bunnySpecialCakeVault.json'
+import bunnySpecialLotteryAbi from 'config/abi/bunnySpecialLottery.json'
+import bunnySpecialPredictionAbi from 'config/abi/bunnySpecialPrediction.json'
+import bunnySpecialXmasAbi from 'config/abi/bunnySpecialXmas.json'
+import cakeAbi from 'config/abi/cake.json'
+import cakeVaultV2Abi from 'config/abi/cakeVaultV2.json'
+import chainlinkOracleAbi from 'config/abi/chainlinkOracle.json'
+import claimRefundAbi from 'config/abi/claimRefund.json'
+import donateAbi from 'config/abi/donate.json'
+import easterNftAbi from 'config/abi/easterNft.json'
 import bep20Abi from 'config/abi/erc20.json'
 import erc721Abi from 'config/abi/erc721.json'
-import lpTokenAbi from 'config/abi/lpToken.json'
-import cakeAbi from 'config/abi/cake.json'
-import ifoV1Abi from 'config/abi/ifoV1.json'
-import ifoV2Abi from 'config/abi/ifoV2.json'
-import pointCenterIfo from 'config/abi/pointCenterIfo.json'
-import lotteryV2Abi from 'config/abi/lotteryV2.json'
-import masterChef from 'config/abi/masterchef.json'
-import masterChefV1 from 'config/abi/masterchefV1.json'
-import sousChef from 'config/abi/sousChef.json'
-import sousChefV2 from 'config/abi/sousChefV2.json'
-import sousChefBnb from 'config/abi/sousChefBnb.json'
-import claimRefundAbi from 'config/abi/claimRefund.json'
-import tradingCompetitionAbi from 'config/abi/tradingCompetition.json'
-import tradingCompetitionV2Abi from 'config/abi/tradingCompetitionV2.json'
-import tradingCompetitionMoboxAbi from 'config/abi/tradingCompetitionMobox.json'
-import easterNftAbi from 'config/abi/easterNft.json'
-import cakeVaultV2Abi from 'config/abi/cakeVaultV2.json'
-import predictionsAbi from 'config/abi/predictions.json'
-import chainlinkOracleAbi from 'config/abi/chainlinkOracle.json'
-import MultiCallAbi from 'config/abi/Multicall.json'
-import bunnySpecialCakeVaultAbi from 'config/abi/bunnySpecialCakeVault.json'
-import bunnySpecialPredictionAbi from 'config/abi/bunnySpecialPrediction.json'
-import bunnySpecialLotteryAbi from 'config/abi/bunnySpecialLottery.json'
-import bunnySpecialXmasAbi from 'config/abi/bunnySpecialXmas.json'
-import farmAuctionAbi from 'config/abi/farmAuction.json'
-import anniversaryAchievementAbi from 'config/abi/anniversaryAchievement.json'
-import galaxyNFTClaimingAbi from 'config/abi/galaxyNFTClaiming.json'
-import nftMarketAbi from 'config/abi/nftMarket.json'
-import nftSaleAbi from 'config/abi/nftSale.json'
-import pancakeSquadAbi from 'config/abi/pancakeSquad.json'
 import erc721CollectionAbi from 'config/abi/erc721collection.json'
 import factoryAbi from 'config/abi/Factory.json'
-import timeLockerAbi from 'config/abi/TokenLocker.json'
-import fivePlusTwoAbi from 'config/abi/FivePlusTwo.json'
-import xenAbi from 'config/abi/xen.json'
-import donateAbi from 'config/abi/donate.json'
-import wlDonateAbi from 'config/abi/wlDonate.json'
+import farmAuctionAbi from 'config/abi/farmAuction.json'
 import fdaoclaimAbi from 'config/abi/fdaoclaim.json'
+import fivePlusTwoAbi from 'config/abi/FivePlusTwo.json'
+import galaxyNFTClaimingAbi from 'config/abi/galaxyNFTClaiming.json'
+import ifoV1Abi from 'config/abi/ifoV1.json'
+import ifoV2Abi from 'config/abi/ifoV2.json'
+import lotteryV2Abi from 'config/abi/lotteryV2.json'
+import lpTokenAbi from 'config/abi/lpToken.json'
+import masterChef from 'config/abi/masterchef.json'
+import masterChefV1 from 'config/abi/masterchefV1.json'
+import MultiCallAbi from 'config/abi/Multicall.json'
+import nftMarketAbi from 'config/abi/nftMarket.json'
+import nftSaleAbi from 'config/abi/nftSale.json'
+import pancakeBunniesAbi from 'config/abi/pancakeBunnies.json'
+import profileABI from 'config/abi/pancakeProfile.json'
+import pancakeSquadAbi from 'config/abi/pancakeSquad.json'
+import pointCenterIfo from 'config/abi/pointCenterIfo.json'
+import predictionsAbi from 'config/abi/predictions.json'
+import sousChef from 'config/abi/sousChef.json'
+import sousChefBnb from 'config/abi/sousChefBnb.json'
+import sousChefV2 from 'config/abi/sousChefV2.json'
+import timeLockerAbi from 'config/abi/TokenLocker.json'
+import tradingCompetitionAbi from 'config/abi/tradingCompetition.json'
+import tradingCompetitionMoboxAbi from 'config/abi/tradingCompetitionMobox.json'
+import tradingCompetitionV2Abi from 'config/abi/tradingCompetitionV2.json'
+import wlDonateAbi from 'config/abi/wlDonate.json'
+import xenAbi from 'config/abi/xen.json'
 
 // Types
 import type {
-  ChainlinkOracle,
-  FarmAuction,
-  Predictions,
-  AnniversaryAchievement,
-  IfoV1,
-  IfoV2,
-  Erc20,
-  Erc721,
-  Cake,
-  BunnyFactory,
-  PancakeBunnies,
-  PancakeProfile,
-  LotteryV2,
-  Masterchef,
-  MasterchefV1,
-  SousChef,
-  SousChefV2,
-  BunnySpecial,
-  LpToken,
-  ClaimRefund,
-  TradingCompetition,
-  TradingCompetitionV2,
-  EasterNft,
-  Multicall,
-  BunnySpecialCakeVault,
-  BunnySpecialPrediction,
-  BunnySpecialLottery,
-  GalaxyNFTClaiming,
-  NftMarket,
-  NftSale,
-  PancakeSquad,
-  Erc721collection,
-  PointCenterIfo,
-  CakeVaultV2,
-  TradingCompetitionMobox,
+    FarmAuction,
+    Predictions
 } from 'config/abi/types'
 
 export const getContract = (abi: any, address: string, signer?: Signer | Provider) => {
@@ -169,8 +103,8 @@ export const getPointCenterIfoContract = (signer?: Signer | Provider) => {
 export const getCakeContract = (signer?: Signer | Provider) => {
   return getContract(cakeAbi, tokens.cake.address, signer) as any
 }
-export const getMDAOContract = (signer?: Signer | Provider) => {
-  return getContract(cakeAbi, tokens.mdao.address, signer) as any
+export const getCDAOContract = (signer?: Signer | Provider) => {
+  return getContract(cakeAbi, tokens.CDAO.address, signer) as any
 }
 export const getProfileContract = (signer?: Signer | Provider) => {
   return getContract(profileABI, getPancakeProfileAddress(), signer) as any

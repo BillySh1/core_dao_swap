@@ -1,24 +1,17 @@
-import { isAddress } from '@ethersproject/address'
-import { formatEther, parseEther } from '@ethersproject/units'
+import { BigNumber } from '@ethersproject/bignumber'
+import { formatEther } from '@ethersproject/units'
+import { Button, Flex } from '@pancakeswap/uikit'
 import { useWeb3React } from '@web3-react/core'
 import { NOT_ON_SALE_SELLER } from 'config/constants'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import useCatchTxError from 'hooks/useCatchTxError'
+import { useWLDonate } from 'hooks/useContract'
 import { useSWRContract } from 'hooks/useSWRContract'
-import { useState } from 'react'
-import addresses from 'config/constants/contracts'
-import bep20Abi from '../../config/abi/erc20.json'
-import styled from 'styled-components'
-import { FDAOIcon, MDAOIcon, PresaleLink } from '../../../packages/uikit/src/components/Svg'
 import useToast from 'hooks/useToast'
-import { getContract } from 'utils'
-import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { getDonateAddress, getDonateRMAddress } from 'utils/addressHelpers'
-import { MaxUint256 } from '@ethersproject/constants'
-import { isNumber } from 'lodash'
-import { Button, Input, Flex } from '@pancakeswap/uikit'
-import { BigNumber } from '@ethersproject/bignumber'
-import { useDonateETHF, useDonateRM, useWLDonate } from 'hooks/useContract'
+import { useState } from 'react'
+import styled from 'styled-components'
+import { FDAOIcon, PresaleLink } from '../../../packages/uikit/src/components/Svg'
 
 const Content = styled.div`
   background: #ffffff;
@@ -143,7 +136,7 @@ export default function WLPresaleCard(props) {
   }
   return (
     <Content>
-      {/* <MDAOIcon style={{ margin: '20px 0' }} width={80} height={80} /> */}
+      {/* <CDAOIcon style={{ margin: '20px 0' }} width={80} height={80} /> */}
       <FDAOIcon style={{ margin: '20px 0' }} width={80} height={80} />
       <TokenName>FDAO</TokenName>
       <PresaleTitle>WhiteList Super Raising</PresaleTitle>

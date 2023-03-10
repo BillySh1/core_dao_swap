@@ -1,22 +1,19 @@
 import { ResetCSS } from '@pancakeswap/uikit'
-import Script from 'next/script'
-import dynamic from 'next/dynamic'
 import BigNumber from 'bignumber.js'
 import GlobalCheckClaimStatus from 'components/GlobalCheckClaimStatus'
-import FixedSubgraphHealthIndicator from 'components/SubgraphHealthIndicator'
-import { ToastListener } from 'contexts/ToastsContext'
-import useEagerConnect from 'hooks/useEagerConnect'
 import { useAccountEventListener } from 'hooks/useAccountEventListener'
+import useEagerConnect from 'hooks/useEagerConnect'
 import useSentryUser from 'hooks/useSentryUser'
 import useUserAgent from 'hooks/useUserAgent'
+import { NextPage } from 'next'
 import type { AppProps } from 'next/app'
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { Fragment } from 'react'
 import { PersistGate } from 'redux-persist/integration/react'
-import { useStore, persistor } from 'state'
+import { persistor, useStore } from 'state'
 import { usePollBlockNumber } from 'state/block/hooks'
 import { usePollCoreFarmData } from 'state/farms/hooks'
-import { NextPage } from 'next'
 import { Blocklist, Updaters } from '..'
 import ErrorBoundary from '../components/ErrorBoundary'
 import Menu from '../components/Menu'
@@ -54,7 +51,7 @@ function MyApp(props: AppProps) {
         />
         <meta
           name="description"
-          content="Cheaper and faster than Uniswap? Discover MemorySwap, the leading DEX on ethf Smart Chain (ethf) with the best farms in DeFi and a lottery for MDAO."
+          content="Cheaper and faster than Uniswap? Discover MemorySwap, the leading DEX on ethf Smart Chain (ethf) with the best farms in DeFi and a lottery for CDAO."
         />
         <meta name="theme-color" content="#1FC7D4" />
         {/* <meta name="twitter:image" content="https://pancakeswap.finance/images/hero.png" /> */}

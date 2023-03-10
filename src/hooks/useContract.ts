@@ -1,62 +1,22 @@
-import { useMemo } from 'react'
+import { Cake, CakeVaultV2, Erc721collection } from 'config/abi/types'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import { useMemo } from 'react'
+import { getMulticallAddress } from 'utils/addressHelpers'
 import {
-  getBep20Contract,
-  getCakeContract,
-  getBunnyFactoryContract,
-  getBunnySpecialContract,
-  getPancakeBunniesContract,
-  getProfileContract,
-  getIfoV1Contract,
-  getIfoV2Contract,
-  getMasterchefContract,
-  getMasterchefV1Contract,
-  getPointCenterIfoContract,
-  getSouschefContract,
-  getClaimRefundContract,
-  getTradingCompetitionContract,
-  getTradingCompetitionContractV2,
-  getTradingCompetitionContractMobox,
-  getEasterNftContract,
-  getErc721Contract,
-  getCakeVaultV2Contract,
-  getPredictionsContract,
-  getChainlinkOracleContract,
-  getLotteryV2Contract,
-  getBunnySpecialCakeVaultContract,
-  getBunnySpecialPredictionContract,
-  getFarmAuctionContract,
-  getBunnySpecialLotteryContract,
-  getAnniversaryAchievementContract,
-  getNftMarketContract,
-  getNftSaleContract,
-  getPancakeSquadContract,
-  getErc721CollectionContract,
-  getBunnySpecialXmasContract,
-  getGalaxyNTFClaimingContract,
-  getFactoryContract,
-  getTimeLockerContract,
-  getMDAOContract,
-  getFivePlusTwoContract,
-  getXenContract,
-  getDonateContract,
-  getDonate2Contract,
-  getDonateRMContract,
-  getDonateETHFContract,
-  getWLDonateContract,
-  getFDAOClaimContract,
+    getAnniversaryAchievementContract, getBep20Contract, getBunnyFactoryContract, getBunnySpecialCakeVaultContract, getBunnySpecialContract, getBunnySpecialLotteryContract, getBunnySpecialPredictionContract, getBunnySpecialXmasContract, getCakeContract, getCakeVaultV2Contract, getCDAOContract, getChainlinkOracleContract, getClaimRefundContract, getDonate2Contract, getDonateContract, getDonateETHFContract, getDonateRMContract, getEasterNftContract, getErc721CollectionContract, getErc721Contract, getFactoryContract, getFarmAuctionContract, getFDAOClaimContract, getFivePlusTwoContract, getGalaxyNTFClaimingContract, getIfoV1Contract,
+    getIfoV2Contract, getLotteryV2Contract, getMasterchefContract,
+    getMasterchefV1Contract, getNftMarketContract,
+    getNftSaleContract, getPancakeBunniesContract, getPancakeSquadContract, getPointCenterIfoContract, getPredictionsContract, getProfileContract, getSouschefContract, getTimeLockerContract, getTradingCompetitionContract, getTradingCompetitionContractMobox, getTradingCompetitionContractV2, getWLDonateContract, getXenContract
 } from 'utils/contractHelpers'
-import { getMulticallAddress, getXENAddress } from 'utils/addressHelpers'
-import { Erc20, Erc20Bytes32, Multicall, Weth, Cake, Erc721collection, CakeVaultV2 } from 'config/abi/types'
 
 // Imports below migrated from Exchange useContract.ts
 import { Contract } from '@ethersproject/contracts'
 import { WETH } from '@pancakeswap/sdk'
-import IPancakePairABI from '../config/abi/IPancakePair.json'
 import { ERC20_BYTES32_ABI } from '../config/abi/erc20'
 import ERC20_ABI from '../config/abi/erc20.json'
-import WETH_ABI from '../config/abi/weth.json'
+import IPancakePairABI from '../config/abi/IPancakePair.json'
 import multiCallAbi from '../config/abi/Multicall.json'
+import WETH_ABI from '../config/abi/weth.json'
 import { getContract, getProviderOrSigner } from '../utils'
 
 import { IPancakePair } from '../config/abi/types/IPancakePair'
@@ -107,12 +67,12 @@ export const useCake = (): { reader: Cake; signer: Cake } => {
   )
 }
 
-export const useMdao = () => {
+export const useCDAO = () => {
   const { account, library } = useActiveWeb3React()
   return useMemo(
     () => ({
-      reader: getMDAOContract(null),
-      signer: getMDAOContract(getProviderOrSigner(library, account)),
+      reader: getCDAOContract(null),
+      signer: getCDAOContract(getProviderOrSigner(library, account)),
     }),
     [account, library],
   )

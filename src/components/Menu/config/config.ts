@@ -1,19 +1,10 @@
 import {
-  MenuItemsType,
-  DropdownMenuItemType,
-  SwapIcon,
-  SwapFillIcon,
-  EarnFillIcon,
-  EarnIcon,
-  TrophyIcon,
-  TrophyFillIcon,
-  NftIcon,
-  NftFillIcon,
-  MoreIcon,
+  DropdownMenuItemType, EarnFillIcon,
+  EarnIcon, MenuItemsType, MoreIcon, NftFillIcon, NftIcon, SwapFillIcon, SwapIcon, TrophyFillIcon, TrophyIcon
 } from '@pancakeswap/uikit'
 import { ContextApi } from 'contexts/Localization/types'
-import { nftsBaseUrl } from 'views/Nft/market/constants'
 import { perpLangMap } from 'utils/getPerpetualLanguageCode'
+import { nftsBaseUrl } from 'views/Nft/market/constants'
 
 export type ConfigMenuItemsType = MenuItemsType & { hideSubNav?: boolean }
 
@@ -128,16 +119,7 @@ const config: (t: ContextApi['t'], languageCode?: string) => ConfigMenuItemsType
       {
         type: DropdownMenuItemType.DIVIDER,
       },
-      {
-        label: t('Blog'),
-        href: 'https://medium.com/pancakeswap',
-        type: DropdownMenuItemType.EXTERNAL_LINK,
-      },
-      {
-        label: t('Docs'),
-        href: 'https://docs.pancakeswap.finance',
-        type: DropdownMenuItemType.EXTERNAL_LINK,
-      },
+  
     ],
   },
 ]

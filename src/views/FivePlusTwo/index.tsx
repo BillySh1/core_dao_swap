@@ -1,14 +1,14 @@
-import Page from 'views/Page'
 import { Button, Card, CardBody, CardFooter, useMatchBreakpoints, useModal } from '@pancakeswap/uikit'
-import styled from 'styled-components'
-import LastWinNumber from './components/lastWinNumber'
-import NumberCom from './components/NumberCom'
-import { useEffect, useState } from 'react'
+import { useTranslation } from 'contexts/Localization'
 import { useFivePlusTwo } from 'hooks/useContract'
 import { useSWRContract } from 'hooks/useSWRContract'
+import { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import Page from 'views/Page'
 import BuyConfirmModal from './components/BuyConfirmModal'
 import HeaderCom from './components/HeaderCom'
-import { useTranslation } from 'contexts/Localization'
+import LastWinNumber from './components/lastWinNumber'
+import NumberCom from './components/NumberCom'
 
 const LotteryWrapper = styled(Card)`
   border-radius: 24px;
@@ -251,7 +251,7 @@ export default function FivePlusTwo(props) {
         <FlexFooter>
           <div>
             <FooterText>
-              {t('Selected')}: <Frimary>1</Frimary> {t('Bets')} <Frimary>158</Frimary> MDAO
+              {t('Selected')}: <Frimary>1</Frimary> {t('Bets')} <Frimary>158</Frimary> CDAO
             </FooterText>
           </div>
           {!isMobile && <Divider />}

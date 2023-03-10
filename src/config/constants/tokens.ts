@@ -2087,11 +2087,11 @@ export const mainnetTokens = defineTokens({
     'Project Galaxy',
     'https://galaxy.eco/',
   ),
-  mdao: new Token(
+  CDAO: new Token(
     TESTNET,
     '0x7991FCCDbA857f944Af88b39d49cb7e91E4e4a41',
     18,
-    'MDAO',
+    'CDAO',
     'MemoryLab Token',
     'https://www.google.com',
   )
@@ -2106,7 +2106,7 @@ export const testnetTokens = defineTokens({
     'Wrapped Ethereum',
     'https://www.google.com/',
   ),
-  mdao: new Token(
+  CDAO: new Token(
     TESTNET,
     '0x93A06C8CE53AF3EE8F7A06200a42BF963b9Dd719',
     18,
