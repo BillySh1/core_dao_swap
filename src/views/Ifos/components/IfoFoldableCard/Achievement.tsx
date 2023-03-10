@@ -1,25 +1,17 @@
-import styled from 'styled-components'
 import {
   Flex,
-  Image,
-  Text,
-  PrizeIcon,
-  Skeleton,
-  LanguageIcon,
-  SvgProps,
-  Svg,
-  TwitterIcon,
-  Link,
-  TelegramIcon,
+  Image, LanguageIcon, Link, PrizeIcon,
+  Skeleton, Svg, SvgProps, TelegramIcon, Text, TwitterIcon
 } from '@pancakeswap/uikit'
-import tokens from 'config/constants/tokens'
-import { useTranslation } from 'contexts/Localization'
-import { PublicIfoData } from 'views/Ifos/types'
-import { Ifo } from 'config/constants/types'
-import { BIG_TEN } from 'utils/bigNumber'
-import { getEthfScanLink } from 'utils'
-import { formatBigNumber } from 'utils/formatBalance'
 import { FlexGap } from 'components/Layout/Flex'
+import tokens from 'config/constants/tokens'
+import { Ifo } from 'config/constants/types'
+import { useTranslation } from 'contexts/Localization'
+import styled from 'styled-components'
+import { getCOREScanLink } from 'utils'
+import { BIG_TEN } from 'utils/bigNumber'
+import { formatBigNumber } from 'utils/formatBalance'
+import { PublicIfoData } from 'views/Ifos/types'
 
 const SmartContractIcon: React.FC<SvgProps> = (props) => {
   return (
@@ -129,7 +121,7 @@ const IfoAchievement: React.FC<Props> = ({ ifo, publicIfoData }) => {
             <Link external href={ifo.articleUrl}>
               <ProposalIcon color="textSubtle" />
             </Link>
-            <Link external href={getEthfScanLink(ifo.address, 'address')}>
+            <Link external href={getCOREScanLink(ifo.address, 'address')}>
               <SmartContractIcon color="textSubtle" />
             </Link>
             {ifo.twitterUrl && (

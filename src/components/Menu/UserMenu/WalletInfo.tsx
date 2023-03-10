@@ -6,7 +6,7 @@ import { useTranslation } from 'contexts/Localization'
 import useAuth from 'hooks/useAuth'
 import useTokenBalance, { useGetBnbBalance } from 'hooks/useTokenBalance'
 
-import { getEthfScanLink } from 'utils'
+import { getCOREScanLink } from 'utils'
 import { formatBigNumber, getFullDisplayBalance } from 'utils/formatBalance'
 import CopyAddress from './CopyAddress'
 
@@ -36,13 +36,13 @@ const WalletInfo: React.FC<WalletInfoProps> = ({ hasLowBnbBalance, onDismiss }) 
       {hasLowBnbBalance && (
         <Message variant="warning" mb="24px">
           <Box>
-            <Text fontWeight="bold">ethf Balance Low</Text>
-            <Text as="p">{t('You need ethf for transaction fees.')}</Text>
+            <Text fontWeight="bold">CORE Balance Low</Text>
+            <Text as="p">{t('You need CORE for transaction fees.')}</Text>
           </Box>
         </Message>
       )}
       <Flex alignItems="center" justifyContent="space-between">
-        <Text color="textSubtle">ethf Balance</Text>
+        <Text color="textSubtle">CORE Balance</Text>
         {fetchStatus !== FetchStatus.Fetched ? (
           <Skeleton height="22px" width="60px" />
         ) : (
@@ -58,7 +58,7 @@ const WalletInfo: React.FC<WalletInfoProps> = ({ hasLowBnbBalance, onDismiss }) 
         )}
       </Flex>
       <Flex alignItems="center" justifyContent="end" mb="24px">
-        <LinkExternal href={getEthfScanLink(account, 'address')}>{t('View on ETHFScan')}</LinkExternal>
+        <LinkExternal href={getCOREScanLink(account, 'address')}>{t('View on COREScan')}</LinkExternal>
       </Flex>
       <Button variant="secondary" width="100%" onClick={handleLogout}>
         {t('Disconnect Wallet')}

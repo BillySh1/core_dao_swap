@@ -2,33 +2,26 @@ import {
   Box,
   CloseIcon,
   Flex,
-  Grid,
-  Text,
-  IconButton,
+  Grid, Heading, IconButton,
   InjectedModalProps,
   LinkExternal,
   ModalContainer,
   ModalHeader,
-  ProfileAvatar,
-  useMatchBreakpoints,
-  Skeleton,
-  Heading,
+  ProfileAvatar, Skeleton, Text, useMatchBreakpoints
 } from '@pancakeswap/uikit'
-import { useProfileForAddress } from 'state/profile/hooks'
-import useTheme from 'hooks/useTheme'
-import styled from 'styled-components'
-import { getEthfScanLink } from 'utils'
-import truncateHash from 'utils/truncateHash'
-import {
-  useGetOrFetchLeaderboardAddressResult,
-  useGetLeaderboardLoadingState,
-  useGetSelectedAddress,
-} from 'state/predictions/hooks'
-import { useTranslation } from 'contexts/Localization'
 import { FetchStatus } from 'config/constants/types'
-import { NetWinnings } from './Results/styles'
+import { useTranslation } from 'contexts/Localization'
+import useTheme from 'hooks/useTheme'
+import {
+  useGetLeaderboardLoadingState, useGetOrFetchLeaderboardAddressResult, useGetSelectedAddress
+} from 'state/predictions/hooks'
+import { useProfileForAddress } from 'state/profile/hooks'
+import styled from 'styled-components'
+import { getCOREScanLink } from 'utils'
+import truncateHash from 'utils/truncateHash'
 import MobileBetsTable from './MobileBetsTable'
 import DesktopBetsTable from './Results/DesktopBetsTable'
+import { NetWinnings } from './Results/styles'
 
 interface WalletStatsModalProps extends InjectedModalProps {
   account?: string
@@ -75,7 +68,7 @@ const WalletStatsModal: React.FC<WalletStatsModalProps> = ({ account, onDismiss,
                 {profile?.username}
               </Heading>
             )}
-            <ExternalLink href={getEthfScanLink(address, 'address')}>{truncateHash(address)}</ExternalLink>
+            <ExternalLink href={getCOREScanLink(address, 'address')}>{truncateHash(address)}</ExternalLink>
           </Box>
         </Flex>
         <IconButton variant="text" onClick={handleDismiss} aria-label="Close the dialog">

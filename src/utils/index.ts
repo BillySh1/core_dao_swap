@@ -1,17 +1,16 @@
-import { Contract } from '@ethersproject/contracts'
 import type { Signer } from '@ethersproject/abstract-signer'
-import type { Provider } from '@ethersproject/providers'
 import { getAddress } from '@ethersproject/address'
-import { AddressZero } from '@ethersproject/constants'
-import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { BigNumber } from '@ethersproject/bignumber'
+import { AddressZero } from '@ethersproject/constants'
+import { Contract } from '@ethersproject/contracts'
+import type { Provider } from '@ethersproject/providers'
+import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
+import { Currency, CurrencyAmount, ETHER, JSBI, Percent, Token } from '@pancakeswap/sdk'
 import IPancakeRouter02ABI from 'config/abi/IPancakeRouter02.json'
-import { IPancakeRouter02 } from 'config/abi/types/IPancakeRouter02'
 import { CHAIN_ID } from 'config/constants/networks'
-import { JSBI, Percent, Token, CurrencyAmount, Currency, ETHER } from '@pancakeswap/sdk'
 import { TokenAddressMap } from 'state/types'
-import { ROUTER_ADDRESS } from '../config/constants'
 import { BASE_BSC_SCAN_URLS } from '../config'
+import { ROUTER_ADDRESS } from '../config/constants'
 import { simpleRpcProvider } from './providers'
 
 // returns the checksummed address if the address is valid, otherwise returns false
@@ -23,7 +22,7 @@ export function isAddress(value: any): string | false {
   }
 }
 
-export function getEthfScanLink(
+export function getCOREScanLink(
   data: string | number,
   type: 'transaction' | 'token' | 'address' | 'block' | 'countdown',
   chainIdOverride?: number,
@@ -48,7 +47,7 @@ export function getEthfScanLink(
   }
 }
 
-export function getEthfScanLinkForNft(collectionAddress: string, tokenId: string): string {
+export function getCOREScanLinkForNft(collectionAddress: string, tokenId: string): string {
   const chainId = CHAIN_ID
   return `${BASE_BSC_SCAN_URLS[chainId]}/token/${collectionAddress}?a=${tokenId}`
 }

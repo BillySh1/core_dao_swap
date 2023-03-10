@@ -1,4 +1,3 @@
-import { ChangeEvent, FormEvent, useEffect, useState, useMemo } from 'react'
 import {
   AutoRenewIcon,
   Box,
@@ -12,35 +11,36 @@ import {
   Input,
   LinkExternal,
   Text,
-  useModal,
+  useModal
 } from '@pancakeswap/uikit'
 import { useWeb3React } from '@web3-react/core'
-import times from 'lodash/times'
+import ConnectWalletButton from 'components/ConnectWalletButton'
+import Container from 'components/Layout/Container'
+import { PageMeta } from 'components/Layout/Page'
+import ReactMarkdown from 'components/ReactMarkdown'
+import { useTranslation } from 'contexts/Localization'
+import useWeb3Provider from 'hooks/useActiveWeb3React'
+import useToast from 'hooks/useToast'
 import isEmpty from 'lodash/isEmpty'
+import times from 'lodash/times'
+import dynamic from 'next/dynamic'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from 'react'
 import { useInitialBlock } from 'state/block/hooks'
 import { SnapshotCommand } from 'state/types'
-import useToast from 'hooks/useToast'
-import useWeb3Provider from 'hooks/useActiveWeb3React'
-import { getEthfScanLink } from 'utils'
+import { getCOREScanLink } from 'utils'
 import truncateHash from 'utils/truncateHash'
 import { signMessage } from 'utils/web3React'
-import { useTranslation } from 'contexts/Localization'
-import Container from 'components/Layout/Container'
-import { DatePicker, TimePicker, DatePickerPortal } from 'views/Voting/components/DatePicker'
-import ConnectWalletButton from 'components/ConnectWalletButton'
-import ReactMarkdown from 'components/ReactMarkdown'
-import { PageMeta } from 'components/Layout/Page'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
-import dynamic from 'next/dynamic'
-import { sendSnapshotData, Message, generateMetaData, generatePayloadData } from '../helpers'
+import { DatePicker, DatePickerPortal, TimePicker } from 'views/Voting/components/DatePicker'
 import Layout from '../components/Layout'
-import { FormErrors, Label, SecondaryLabel } from './styles'
+import VoteDetailsModal from '../components/VoteDetailsModal'
+import { ADMINS, VOTE_THRESHOLD } from '../config'
+import { generateMetaData, generatePayloadData, Message, sendSnapshotData } from '../helpers'
 import Choices, { Choice, makeChoice, MINIMUM_CHOICES } from './Choices'
 import { combineDateAndTime, getFormErrors } from './helpers'
+import { FormErrors, Label, SecondaryLabel } from './styles'
 import { FormState } from './types'
-import { ADMINS, VOTE_THRESHOLD } from '../config'
-import VoteDetailsModal from '../components/VoteDetailsModal'
 
 const EasyMde = dynamic(() => import('components/EasyMde'), {
   ssr: false,
@@ -266,14 +266,14 @@ const CreateProposal = () => {
                     <Text color="textSubtle" mr="16px">
                       {t('Creator')}
                     </Text>
-                    <LinkExternal href={getEthfScanLink(account, 'address')}>{truncateHash(account)}</LinkExternal>
+                    <LinkExternal href={getCOREScanLink(account, 'address')}>{truncateHash(account)}</LinkExternal>
                   </Flex>
                 )}
                 <Flex alignItems="center" mb="16px">
                   <Text color="textSubtle" mr="16px">
                     {t('Snapshot')}
                   </Text>
-                  <LinkExternal href={getEthfScanLink(snapshot, 'block')}>{snapshot}</LinkExternal>
+                  <LinkExternal href={getCOREScanLink(snapshot, 'block')}>{snapshot}</LinkExternal>
                 </Flex>
                 {account ? (
                   <>

@@ -1,12 +1,12 @@
 import { Currency, Token } from '@pancakeswap/sdk'
-import { Button, Text, Modal, useModal, InjectedModalProps, Link } from '@pancakeswap/uikit'
-import { useTranslation } from 'contexts/Localization'
-import styled from 'styled-components'
-import { AutoRow } from 'components/Layout/Row'
+import { Button, InjectedModalProps, Link, Modal, Text, useModal } from '@pancakeswap/uikit'
 import { AutoColumn } from 'components/Layout/Column'
+import { AutoRow } from 'components/Layout/Row'
 import { CurrencyLogo } from 'components/Logo'
+import { useTranslation } from 'contexts/Localization'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { getEthfScanLink } from 'utils'
+import styled from 'styled-components'
+import { getCOREScanLink } from 'utils'
 import { wrappedCurrency } from 'utils/wrappedCurrency'
 import { useUnsupportedTokens } from '../hooks/Tokens'
 
@@ -51,7 +51,7 @@ const UnsupportedModal: React.FC<Props> = ({ currencies, onDismiss }) => {
                   <Text>{token.symbol}</Text>
                 </AutoRow>
                 {chainId && (
-                  <Link external small color="primaryDark" href={getEthfScanLink(token.address, 'address', chainId)}>
+                  <Link external small color="primaryDark" href={getCOREScanLink(token.address, 'address', chainId)}>
                     {token.address}
                   </Link>
                 )}

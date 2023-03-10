@@ -1,26 +1,21 @@
+import { Price } from '@pancakeswap/sdk'
 import {
   Box,
-  Flex,
-  Text,
-  Td,
-  IconButton,
+  Flex, IconButton,
   Link,
-  OpenNewIcon,
-  useMatchBreakpoints,
-  useModal,
-  Skeleton,
+  OpenNewIcon, Skeleton, Td, Text, useMatchBreakpoints,
+  useModal
 } from '@pancakeswap/uikit'
 import { NextLinkFromReactRouter } from 'components/NextLink'
-import { Activity, NftToken } from 'state/nftMarket/types'
-import { Price } from '@pancakeswap/sdk'
-import { getEthfScanLink } from 'utils'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import { Activity, NftToken } from 'state/nftMarket/types'
+import { getCOREScanLink } from 'utils'
 import ProfileCell from 'views/Nft/market/components/ProfileCell'
-import MobileModal from './MobileModal'
-import ActivityPrice from './ActivityPrice'
-import ActivityEventText from './ActivityEventText'
 import { nftsBaseUrl, pancakeBunniesAddress } from '../../constants'
 import NFTMedia from '../NFTMedia'
+import ActivityEventText from './ActivityEventText'
+import ActivityPrice from './ActivityPrice'
+import MobileModal from './MobileModal'
 
 interface ActivityRowProps {
   activity: Activity
@@ -157,7 +152,7 @@ const ActivityRow: React.FC<ActivityRowProps> = ({
       </Td>
       {isXs || isSm ? null : (
         <Td>
-          <IconButton as={Link} external href={getEthfScanLink(activity.tx, 'transaction', chainId)}>
+          <IconButton as={Link} external href={getCOREScanLink(activity.tx, 'transaction', chainId)}>
             <OpenNewIcon color="textSubtle" width="18px" />
           </IconButton>
         </Td>

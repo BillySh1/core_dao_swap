@@ -1,44 +1,34 @@
 /* eslint-disable no-nested-ternary */
-import { useMemo } from 'react'
-import { NextLinkFromReactRouter } from 'components/NextLink'
-import { Duration } from 'date-fns'
-import styled from 'styled-components'
 import {
-  Text,
-  Box,
-  Heading,
-  Button,
+  Box, Breadcrumbs, Button,
   Card,
-  Flex,
-  Breadcrumbs,
-  Link as UIKitLink,
+  Flex, Heading, Image, Link as UIKitLink,
   LinkExternal,
-  Spinner,
-  Image,
-  useMatchBreakpoints,
+  Spinner, Text, useMatchBreakpoints
 } from '@pancakeswap/uikit'
 import Page from 'components/Layout/Page'
-import { getEthfScanLink } from 'utils'
-import truncateHash from 'utils/truncateHash'
-import useCMCLink from 'views/Info/hooks/useCMCLink'
-import { CurrencyLogo } from 'views/Info/components/CurrencyLogo'
-import { formatAmount } from 'utils/formatInfoNumbers'
-import Percent from 'views/Info/components/Percent'
-import SaveIcon from 'views/Info/components/SaveIcon'
-import {
-  usePoolDatas,
-  useTokenData,
-  usePoolsForToken,
-  useTokenChartData,
-  useTokenPriceData,
-  useTokenTransactions,
-} from 'state/info/hooks'
-import PoolTable from 'views/Info/components/InfoTables/PoolsTable'
-import TransactionTable from 'views/Info/components/InfoTables/TransactionsTable'
-import { useWatchlistTokens } from 'state/user/hooks'
+import { NextLinkFromReactRouter } from 'components/NextLink'
 import { ONE_HOUR_SECONDS } from 'config/constants/info'
 import { useTranslation } from 'contexts/Localization'
+import { Duration } from 'date-fns'
+import { useMemo } from 'react'
+import {
+  usePoolDatas, usePoolsForToken,
+  useTokenChartData, useTokenData, useTokenPriceData,
+  useTokenTransactions
+} from 'state/info/hooks'
+import { useWatchlistTokens } from 'state/user/hooks'
+import styled from 'styled-components'
+import { getCOREScanLink } from 'utils'
+import { formatAmount } from 'utils/formatInfoNumbers'
+import truncateHash from 'utils/truncateHash'
+import { CurrencyLogo } from 'views/Info/components/CurrencyLogo'
 import ChartCard from 'views/Info/components/InfoCharts/ChartCard'
+import PoolTable from 'views/Info/components/InfoTables/PoolsTable'
+import TransactionTable from 'views/Info/components/InfoTables/TransactionsTable'
+import Percent from 'views/Info/components/Percent'
+import SaveIcon from 'views/Info/components/SaveIcon'
+import useCMCLink from 'views/Info/hooks/useCMCLink'
 
 const ContentLayout = styled.div`
   margin-top: 16px;
@@ -129,8 +119,8 @@ const TokenPage: React.FC<{ routeAddress: string }> = ({ routeAddress }) => {
                 </Flex>
               </Breadcrumbs>
               <Flex justifyContent={[null, null, 'flex-end']} mt={['8px', '8px', 0]}>
-                <LinkExternal mr="8px" color="primary" href={getEthfScanLink(address, 'address')}>
-                  {t('View on ETHFScan')}
+                <LinkExternal mr="8px" color="primary" href={getCOREScanLink(address, 'address')}>
+                  {t('View on COREScan')}
                 </LinkExternal>
                 {cmcLink && (
                   <StyledCMCLink href={cmcLink} rel="noopener noreferrer nofollow" target="_blank">

@@ -1,15 +1,15 @@
-import { InjectedModalProps, Modal, Flex, Text, Button, Link, BinanceIcon, Box } from '@pancakeswap/uikit'
 import { Price } from '@pancakeswap/sdk'
-import useTheme from 'hooks/useTheme'
-import { Activity, NftToken } from 'state/nftMarket/types'
+import { BinanceIcon, Box, Button, Flex, InjectedModalProps, Link, Modal, Text } from '@pancakeswap/uikit'
 import { LightGreyCard } from 'components/Card'
 import { useTranslation } from 'contexts/Localization'
-import truncateHash from 'utils/truncateHash'
-import { multiplyPriceByAmount } from 'utils/prices'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { getEthfScanLink } from 'utils'
-import ActivityEventText from './ActivityEventText'
+import useTheme from 'hooks/useTheme'
+import { Activity, NftToken } from 'state/nftMarket/types'
+import { getCOREScanLink } from 'utils'
+import { multiplyPriceByAmount } from 'utils/prices'
+import truncateHash from 'utils/truncateHash'
 import NFTMedia from '../NFTMedia'
+import ActivityEventText from './ActivityEventText'
 
 interface MobileModalProps extends InjectedModalProps {
   activity: Activity
@@ -100,8 +100,8 @@ const MobileModal: React.FC<MobileModalProps> = ({
           </Flex>
         </LightGreyCard>
         <Flex flexDirection="column" pt="16px" alignItems="center">
-          <Button as={Link} external href={getEthfScanLink(activity.tx, 'transaction', chainId)}>
-            {t('View on ETHFScan')}
+          <Button as={Link} external href={getCOREScanLink(activity.tx, 'transaction', chainId)}>
+            {t('View on COREScan')}
           </Button>
         </Flex>
       </Flex>

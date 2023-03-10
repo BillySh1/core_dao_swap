@@ -1,10 +1,10 @@
-import styled from 'styled-components'
-import { Box, Flex, Text, SearchIcon, Link } from '@pancakeswap/uikit'
-import { getEthfScanLink } from 'utils'
-import { formatNumber } from 'utils/formatBalance'
-import uriToHttp from 'utils/uriToHttp'
+import { Box, Flex, Link, SearchIcon, Text } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import styled from 'styled-components'
+import { getCOREScanLink } from 'utils'
+import { formatNumber } from 'utils/formatBalance'
+import uriToHttp from 'utils/uriToHttp'
 import ExpandableCard from './ExpandableCard'
 
 interface DetailsCardProps {
@@ -31,7 +31,7 @@ const DetailsCard: React.FC<DetailsCardProps> = ({ contractAddress, ipfsJson, co
         <Text fontSize="12px" color="textSubtle" bold textTransform="uppercase">
           {t('Contract address')}
         </Text>
-        <Link external href={getEthfScanLink(contractAddress, 'address', chainId)}>
+        <Link external href={getCOREScanLink(contractAddress, 'address', chainId)}>
           <LongTextContainer bold>{contractAddress}</LongTextContainer>
         </Link>
       </Flex>

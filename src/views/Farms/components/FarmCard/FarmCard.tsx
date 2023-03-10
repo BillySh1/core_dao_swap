@@ -1,18 +1,18 @@
-import { useState } from 'react'
+import { Card, Flex, Skeleton, Text } from '@pancakeswap/uikit'
 import BigNumber from 'bignumber.js'
-import styled from 'styled-components'
-import { Card, Flex, Text, Skeleton } from '@pancakeswap/uikit'
-import { getEthfScanLink } from 'utils'
-import { useTranslation } from 'contexts/Localization'
 import ExpandableSectionButton from 'components/ExpandableSectionButton'
 import { BASE_ADD_LIQUIDITY_URL } from 'config'
+import { useTranslation } from 'contexts/Localization'
+import { useState } from 'react'
+import styled from 'styled-components'
+import { getCOREScanLink } from 'utils'
 import { getAddress } from 'utils/addressHelpers'
 import getLiquidityUrlPathParts from 'utils/getLiquidityUrlPathParts'
-import DetailsSection from './DetailsSection'
-import CardHeading from './CardHeading'
 import { FarmWithStakedValue } from '../types'
-import CardActionsContainer from './CardActionsContainer'
 import ApyButton from './ApyButton'
+import CardActionsContainer from './CardActionsContainer'
+import CardHeading from './CardHeading'
+import DetailsSection from './DetailsSection'
 
 const StyledCard = styled(Card)`
   align-self: baseline;
@@ -118,7 +118,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, displayApr, removed, cakePric
         {showExpandableSection && (
           <DetailsSection
             removed={removed}
-            bscScanAddress={getEthfScanLink(lpAddress, 'address')}
+            bscScanAddress={getCOREScanLink(lpAddress, 'address')}
             infoAddress={`/info/pool/${lpAddress}`}
             totalValueFormatted={totalValueFormatted}
             lpLabel={lpLabel}

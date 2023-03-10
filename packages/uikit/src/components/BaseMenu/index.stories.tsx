@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { BrowserRouter, Link } from "react-router-dom";
-import InlineMenu from "./InlineMenu";
-import SubMenuComp from "./SubMenu";
-import { SubMenuItem } from "./styles";
-import { LinkExternal } from "../Link";
 import { Box, Flex, Grid } from "../Box";
-import { Text } from "../Text";
 import Button from "../Button/Button";
+import { LinkExternal } from "../Link";
 import { EllipsisIcon } from "../Svg";
+import { Text } from "../Text";
+import InlineMenu from "./InlineMenu";
+import { SubMenuItem } from "./styles";
+import SubMenuComp from "./SubMenu";
 
 export default {
   title: "Components/Menu",
@@ -72,7 +72,7 @@ export const SubMenu: React.FC = () => {
           options={{ placement: "right", offset: [0, 15], padding: { top: 20 } }}
         >
           <SubMenuItem as={LinkExternal} href="https://bscscan.com" bold={false} color="text">
-            View on ETHF Scan
+            View on CORE Scan
           </SubMenuItem>
           <SubMenuItem as={LinkExternal} href="https://pancakeswap.info" bold={false} color="text" target="blank">
             View on PCS Info
@@ -93,7 +93,7 @@ export const SubMenu: React.FC = () => {
           }
         >
           <SubMenuItem as={LinkExternal} href="https://explorer.etherfair.org" bold={false} color="text">
-            View on ETHFSCAN
+            View on CORESCAN
           </SubMenuItem>
           <SubMenuItem as={LinkExternal} href="/" bold={false} color="text" target="blank">
             View on PCS Info

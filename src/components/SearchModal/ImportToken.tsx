@@ -1,14 +1,14 @@
-import { useState } from 'react'
-import { Token, Currency } from '@pancakeswap/sdk'
-import { Button, Text, ErrorIcon, Flex, Message, Checkbox, Link, Tag, Grid } from '@pancakeswap/uikit'
+import { Currency, Token } from '@pancakeswap/sdk'
+import { Button, Checkbox, ErrorIcon, Flex, Grid, Link, Message, Tag, Text } from '@pancakeswap/uikit'
 import { AutoColumn } from 'components/Layout/Column'
-import { useAddUserToken } from 'state/user/hooks'
-import { getEthfScanLink } from 'utils'
-import truncateHash from 'utils/truncateHash'
-import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { useCombinedInactiveList } from 'state/lists/hooks'
 import { ListLogo } from 'components/Logo'
 import { useTranslation } from 'contexts/Localization'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import { useState } from 'react'
+import { useCombinedInactiveList } from 'state/lists/hooks'
+import { useAddUserToken } from 'state/user/hooks'
+import { getCOREScanLink } from 'utils'
+import truncateHash from 'utils/truncateHash'
 
 interface ImportProps {
   tokens: Token[]
@@ -66,8 +66,8 @@ function ImportToken({ tokens, handleCurrencySelect }: ImportProps) {
             {chainId && (
               <Flex justifyContent="space-between" width="100%">
                 <Text mr="4px">{address}</Text>
-                <Link href={getEthfScanLink(token.address, 'address', chainId)} external>
-                  ({t('View on ETHFScan')})
+                <Link href={getCOREScanLink(token.address, 'address', chainId)} external>
+                  ({t('View on COREScan')})
                 </Link>
               </Flex>
             )}

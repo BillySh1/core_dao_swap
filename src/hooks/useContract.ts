@@ -3,10 +3,10 @@ import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useMemo } from 'react'
 import { getMulticallAddress } from 'utils/addressHelpers'
 import {
-    getAnniversaryAchievementContract, getBep20Contract, getBunnyFactoryContract, getBunnySpecialCakeVaultContract, getBunnySpecialContract, getBunnySpecialLotteryContract, getBunnySpecialPredictionContract, getBunnySpecialXmasContract, getCakeContract, getCakeVaultV2Contract, getCDAOContract, getChainlinkOracleContract, getClaimRefundContract, getDonate2Contract, getDonateContract, getDonateETHFContract, getDonateRMContract, getEasterNftContract, getErc721CollectionContract, getErc721Contract, getFactoryContract, getFarmAuctionContract, getFDAOClaimContract, getFivePlusTwoContract, getGalaxyNTFClaimingContract, getIfoV1Contract,
-    getIfoV2Contract, getLotteryV2Contract, getMasterchefContract,
-    getMasterchefV1Contract, getNftMarketContract,
-    getNftSaleContract, getPancakeBunniesContract, getPancakeSquadContract, getPointCenterIfoContract, getPredictionsContract, getProfileContract, getSouschefContract, getTimeLockerContract, getTradingCompetitionContract, getTradingCompetitionContractMobox, getTradingCompetitionContractV2, getWLDonateContract, getXenContract
+  getAnniversaryAchievementContract, getBep20Contract, getBunnyFactoryContract, getBunnySpecialCakeVaultContract, getBunnySpecialContract, getBunnySpecialLotteryContract, getBunnySpecialPredictionContract, getBunnySpecialXmasContract, getCakeContract, getCakeVaultV2Contract, getCDAOContract, getChainlinkOracleContract, getClaimRefundContract, getDonate2Contract, getDonateContract, getDonateCOREContract, getDonateRMContract, getEasterNftContract, getErc721CollectionContract, getErc721Contract, getFactoryContract, getFarmAuctionContract, getFDAOClaimContract, getFivePlusTwoContract, getGalaxyNTFClaimingContract, getIfoV1Contract,
+  getIfoV2Contract, getLotteryV2Contract, getMasterchefContract,
+  getMasterchefV1Contract, getNftMarketContract,
+  getNftSaleContract, getPancakeBunniesContract, getPancakeSquadContract, getPointCenterIfoContract, getPredictionsContract, getProfileContract, getSouschefContract, getTimeLockerContract, getTradingCompetitionContract, getTradingCompetitionContractMobox, getTradingCompetitionContractV2, getWLDonateContract, getXenContract
 } from 'utils/contractHelpers'
 
 // Imports below migrated from Exchange useContract.ts
@@ -252,9 +252,9 @@ export const useDonateRM = (type)=>{
   const { library } = useActiveWeb3React()
   return useMemo(() => getDonateRMContract(library.getSigner()), [library, type])
 } 
-export const useDonateETHF = (type)=>{
+export const useDonateCORE = (type)=>{
   const { library } = useActiveWeb3React()
-  return useMemo(() => getDonateETHFContract(library.getSigner()), [library, type])
+  return useMemo(() => getDonateCOREContract(library.getSigner()), [library, type])
 } 
 
 export const useWLDonate = ()=>{

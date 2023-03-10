@@ -1,17 +1,17 @@
+import { Button, COREScanIcon, Flex, IconButton, Link, useModal } from '@pancakeswap/uikit'
+import { useWeb3React } from '@web3-react/core'
 import { NextLinkFromReactRouter as ReactRouterLink } from 'components/NextLink'
-import { EthfScanIcon, Flex, IconButton, Link, Button, useModal } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
-import { getEthfScanLink } from 'utils'
+import { Achievement, Profile } from 'state/types'
+import { getCOREScanLink } from 'utils'
 import { formatNumber } from 'utils/formatBalance'
 import truncateHash from 'utils/truncateHash'
-import { Achievement, Profile } from 'state/types'
-import { useWeb3React } from '@web3-react/core'
-import EditProfileAvatar from './EditProfileAvatar'
 import BannerHeader from '../../components/BannerHeader'
-import StatBox, { StatBoxItem } from '../../components/StatBox'
-import MarketPageTitle from '../../components/MarketPageTitle'
-import EditProfileModal from './EditProfileModal'
 import AvatarImage from '../../components/BannerHeader/AvatarImage'
+import MarketPageTitle from '../../components/MarketPageTitle'
+import StatBox, { StatBoxItem } from '../../components/StatBox'
+import EditProfileAvatar from './EditProfileAvatar'
+import EditProfileModal from './EditProfileModal'
 
 interface HeaderProps {
   accountPath: string
@@ -88,11 +88,11 @@ const ProfileHeader: React.FC<HeaderProps> = ({
               style={{
                 width: 'fit-content',
               }}
-              href={getEthfScanLink(accountPath, 'address') || ''}
+              href={getCOREScanLink(accountPath, 'address') || ''}
               // @ts-ignore
-              alt={t('View EthfScan for user address')}
+              alt={t('View COREScan for user address')}
             >
-              <EthfScanIcon width="20px" color="primary" />
+              <COREScanIcon width="20px" color="primary" />
             </IconButton>
           )}
         </Flex>
@@ -157,7 +157,7 @@ const ProfileHeader: React.FC<HeaderProps> = ({
     return (
       <Flex flexDirection="column" mb={[16, null, 0]} mr={[0, null, 16]}>
         {accountPath && profile?.username && (
-          <Link href={getEthfScanLink(accountPath, 'address')} external bold color="primary">
+          <Link href={getCOREScanLink(accountPath, 'address')} external bold color="primary">
             {truncateHash(accountPath)}
           </Link>
         )}

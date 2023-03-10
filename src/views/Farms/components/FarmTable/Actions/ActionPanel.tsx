@@ -1,17 +1,17 @@
-import styled, { keyframes, css } from 'styled-components'
-import { useTranslation } from 'contexts/Localization'
 import { LinkExternal, Text } from '@pancakeswap/uikit'
-import getLiquidityUrlPathParts from 'utils/getLiquidityUrlPathParts'
+import { CoreTag, DualTag, FarmAuctionTag } from 'components/Tags'
+import { useTranslation } from 'contexts/Localization'
+import styled, { css, keyframes } from 'styled-components'
+import { getCOREScanLink } from 'utils'
 import { getAddress } from 'utils/addressHelpers'
-import { getEthfScanLink } from 'utils'
-import { FarmAuctionTag, CoreTag, DualTag } from 'components/Tags'
+import getLiquidityUrlPathParts from 'utils/getLiquidityUrlPathParts'
 import { FarmWithStakedValue } from '../../types'
 
+import Apr, { AprProps } from '../Apr'
+import Liquidity, { LiquidityProps } from '../Liquidity'
+import Multiplier, { MultiplierProps } from '../Multiplier'
 import HarvestAction from './HarvestAction'
 import StakedAction from './StakedAction'
-import Apr, { AprProps } from '../Apr'
-import Multiplier, { MultiplierProps } from '../Multiplier'
-import Liquidity, { LiquidityProps } from '../Liquidity'
 
 export interface ActionPanelProps {
   apr: AprProps
@@ -148,7 +148,7 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
     tokenAddress: token.address,
   })
   const lpAddress = getAddress(farm.lpAddresses)
-  const bsc = getEthfScanLink(lpAddress, 'address')
+  const bsc = getCOREScanLink(lpAddress, 'address')
   const info = `/info/pool/${lpAddress}`
 
   return (

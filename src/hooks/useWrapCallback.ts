@@ -1,12 +1,12 @@
 import { Currency, currencyEquals, ETHER, WETH } from '@pancakeswap/sdk'
-import { useMemo } from 'react'
-import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useTranslation } from 'contexts/Localization'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import { useMemo } from 'react'
 import tryParseAmount from 'utils/tryParseAmount'
 import { useTransactionAdder } from '../state/transactions/hooks'
 import { useCurrencyBalance } from '../state/wallet/hooks'
-import { useWBNBContract } from './useContract'
 import { useCallWithGasPrice } from './useCallWithGasPrice'
+import { useWBNBContract } from './useContract'
 
 export enum WrapType {
   NOT_APPLICABLE,
@@ -50,13 +50,13 @@ export default function useWrapCallback(
                   const txReceipt = await callWithGasPrice(wbnbContract, 'deposit', undefined, {
                     value: `0x${inputAmount.raw.toString(16)}`,
                   })
-                  addTransaction(txReceipt, { summary: `Wrap ${inputAmount.toSignificant(6)} ETHF to WETHF` })
+                  addTransaction(txReceipt, { summary: `Wrap ${inputAmount.toSignificant(6)} CORE to WCORE` })
                 } catch (error) {
                   console.error('Could not deposit', error)
                 }
               }
             : undefined,
-        inputError: sufficientBalance ? undefined : t('Insufficient ETHF balance'),
+        inputError: sufficientBalance ? undefined : t('Insufficient CORE balance'),
       }
     }
     if (currencyEquals(WETH[chainId], inputCurrency) && outputCurrency === ETHER) {
@@ -69,13 +69,13 @@ export default function useWrapCallback(
                   const txReceipt = await callWithGasPrice(wbnbContract, 'withdraw', [
                     `0x${inputAmount.raw.toString(16)}`,
                   ])
-                  addTransaction(txReceipt, { summary: `Unwrap ${inputAmount.toSignificant(6)} WETHF to ETHF` })
+                  addTransaction(txReceipt, { summary: `Unwrap ${inputAmount.toSignificant(6)} WCORE to CORE` })
                 } catch (error) {
                   console.error('Could not withdraw', error)
                 }
               }
             : undefined,
-        inputError: sufficientBalance ? undefined : t('Insufficient WETHF balance'),
+        inputError: sufficientBalance ? undefined : t('Insufficient WCORE balance'),
       }
     }
     return NOT_APPLICABLE

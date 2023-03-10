@@ -1,7 +1,7 @@
-import { TradeType } from './constants'
 import invariant from 'tiny-invariant'
-import { validateAndParseAddress } from './utils'
+import { TradeType } from './constants'
 import { CurrencyAmount, ETHER, Percent, Trade } from './entities'
+import { validateAndParseAddress } from './utils'
 
 /**
  * Options for producing the arguments to send call to the router.
@@ -97,7 +97,7 @@ export abstract class Router {
     switch (trade.tradeType) {
       case TradeType.EXACT_INPUT:
         if (etherIn) {
-          methodName = useFeeOnTransfer ? 'swapExactETHForTokensSupportingFeeOnTransferTokens' : 'swapExactETHForTokens'
+          methodName = useFeeOnTransfer ? 'swapExactCOREorTokensSupportingFeeOnTransferTokens' : 'swapExactCOREorTokens'
           // (uint amountOutMin, address[] calldata path, address to, uint deadline)
           args = [amountOut, path, to, deadline]
           value = amountIn
@@ -118,7 +118,7 @@ export abstract class Router {
       case TradeType.EXACT_OUTPUT:
         invariant(!useFeeOnTransfer, 'EXACT_OUT_FOT')
         if (etherIn) {
-          methodName = 'swapETHForExactTokens'
+          methodName = 'swapCOREorExactTokens'
           // (uint amountOut, address[] calldata path, address to, uint deadline)
           args = [amountOut, path, to, deadline]
           value = amountIn

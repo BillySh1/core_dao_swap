@@ -14,13 +14,13 @@ import {
   ModalProps,
   ModalTitle,
   Spinner,
-  Text,
+  Text
 } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import useTheme from 'hooks/useTheme'
 
-import { getEthfScanLink } from 'utils'
+import { getCOREScanLink } from 'utils'
 import truncateHash from 'utils/truncateHash'
 
 type ConfirmModalProps = {
@@ -87,8 +87,8 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
               <Text mb="30px" bold>
                 {t('Transaction Submitted')}
               </Text>
-              <LinkExternal href={getEthfScanLink(txHash, 'transaction', chainId)} mb="30px">
-                {t('View on ETHFScan')}: {truncateHash(txHash, 8, 0)}
+              <LinkExternal href={getCOREScanLink(txHash, 'transaction', chainId)} mb="30px">
+                {t('View on COREScan')}: {truncateHash(txHash, 8, 0)}
               </LinkExternal>
               <Flex
                 justifyContent="center"

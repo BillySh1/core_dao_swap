@@ -1,29 +1,29 @@
-import { useEffect, useState } from 'react'
-import { InjectedModalProps } from '@pancakeswap/uikit'
 import { MaxUint256, Zero } from '@ethersproject/constants'
-import useTheme from 'hooks/useTheme'
-import { useTranslation, TranslateFunction } from 'contexts/Localization'
-import useTokenBalance, { useGetBnbBalance } from 'hooks/useTokenBalance'
-import { getBalanceNumber } from 'utils/formatBalance'
-import { ethersToBigNumber } from 'utils/bigNumber'
-import tokens from 'config/constants/tokens'
-import { CHAIN_ID } from 'config/constants/networks'
+import { formatEther, parseUnits } from '@ethersproject/units'
 import { ChainId } from '@pancakeswap/sdk'
-import { parseUnits, formatEther } from '@ethersproject/units'
-import { useERC20, useNftMarketContract } from 'hooks/useContract'
+import { InjectedModalProps } from '@pancakeswap/uikit'
 import { useWeb3React } from '@web3-react/core'
-import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
-import useApproveConfirmTransaction from 'hooks/useApproveConfirmTransaction'
-import { requiresApproval } from 'utils/requiresApproval'
-import useToast from 'hooks/useToast'
 import { ToastDescriptionWithTx } from 'components/Toast'
+import { CHAIN_ID } from 'config/constants/networks'
+import tokens from 'config/constants/tokens'
+import { TranslateFunction, useTranslation } from 'contexts/Localization'
+import useApproveConfirmTransaction from 'hooks/useApproveConfirmTransaction'
+import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
+import { useERC20, useNftMarketContract } from 'hooks/useContract'
+import useTheme from 'hooks/useTheme'
+import useToast from 'hooks/useToast'
+import useTokenBalance, { useGetBnbBalance } from 'hooks/useTokenBalance'
+import { useEffect, useState } from 'react'
 import { NftToken } from 'state/nftMarket/types'
-import { StyledModal } from './styles'
-import ReviewStage from './ReviewStage'
-import ConfirmStage from '../shared/ConfirmStage'
+import { ethersToBigNumber } from 'utils/bigNumber'
+import { getBalanceNumber } from 'utils/formatBalance'
+import { requiresApproval } from 'utils/requiresApproval'
 import ApproveAndConfirmStage from '../shared/ApproveAndConfirmStage'
-import { PaymentCurrency, BuyingStage } from './types'
+import ConfirmStage from '../shared/ConfirmStage'
 import TransactionConfirmed from '../shared/TransactionConfirmed'
+import ReviewStage from './ReviewStage'
+import { StyledModal } from './styles'
+import { BuyingStage, PaymentCurrency } from './types'
 
 const modalTitles = (t: TranslateFunction) => ({
   [BuyingStage.REVIEW]: t('Review'),
@@ -43,7 +43,7 @@ const wbnbAddress =
 const BuyModal: React.FC<BuyModalProps> = ({ nftToBuy, onDismiss }) => {
   const [stage, setStage] = useState(BuyingStage.REVIEW)
   const [confirmedTxHash, setConfirmedTxHash] = useState('')
-  const [paymentCurrency, setPaymentCurrency] = useState<PaymentCurrency>(PaymentCurrency.ETHF)
+  const [paymentCurrency, setPaymentCurrency] = useState<PaymentCurrency>(PaymentCurrency.CORE)
   const [isPaymentCurrentInitialized, setIsPaymentCurrentInitialized] = useState(false)
   const { theme } = useTheme()
   const { t } = useTranslation()
@@ -66,17 +66,17 @@ const BuyModal: React.FC<BuyModalProps> = ({ nftToBuy, onDismiss }) => {
   const { balance: wbnbBalance, fetchStatus: wbnbFetchStatus } = useTokenBalance(wbnbAddress)
   const formattedWbnbBalance = getBalanceNumber(wbnbBalance)
 
-  const walletBalance = paymentCurrency === PaymentCurrency.ETHF ? formattedBnbBalance : formattedWbnbBalance
-  const walletFetchStatus = paymentCurrency === PaymentCurrency.ETHF ? bnbFetchStatus : wbnbFetchStatus
+  const walletBalance = paymentCurrency === PaymentCurrency.CORE ? formattedBnbBalance : formattedWbnbBalance
+  const walletFetchStatus = paymentCurrency === PaymentCurrency.CORE ? bnbFetchStatus : wbnbFetchStatus
 
   const notEnoughBnbForPurchase =
-    paymentCurrency === PaymentCurrency.ETHF
+    paymentCurrency === PaymentCurrency.CORE
       ? bnbBalance.lt(nftPriceWei)
       : wbnbBalance.lt(ethersToBigNumber(nftPriceWei))
 
   useEffect(() => {
     if (bnbBalance.lt(nftPriceWei) && wbnbBalance.gte(ethersToBigNumber(nftPriceWei)) && !isPaymentCurrentInitialized) {
-      setPaymentCurrency(PaymentCurrency.WETHF)
+      setPaymentCurrency(PaymentCurrency.WCORE)
       setIsPaymentCurrentInitialized(true)
     }
   }, [bnbBalance, wbnbBalance, nftPriceWei, isPaymentCurrentInitialized])
@@ -96,7 +96,7 @@ const BuyModal: React.FC<BuyModalProps> = ({ nftToBuy, onDismiss }) => {
     },
     onConfirm: () => {
       const payAmount = Number.isNaN(nftPrice) ? Zero : parseUnits(nftToBuy?.marketData?.currentAskPrice)
-      if (paymentCurrency === PaymentCurrency.ETHF) {
+      if (paymentCurrency === PaymentCurrency.CORE) {
         return callWithGasPrice(nftMarketContract, 'buyTokenUsingBNB', [nftToBuy.collectionAddress, nftToBuy.tokenId], {
           value: payAmount,
         })
@@ -118,7 +118,7 @@ const BuyModal: React.FC<BuyModalProps> = ({ nftToBuy, onDismiss }) => {
   })
 
   const continueToNextStage = () => {
-    if (paymentCurrency === PaymentCurrency.WETHF && !isApproved) {
+    if (paymentCurrency === PaymentCurrency.WCORE && !isApproved) {
       setStage(BuyingStage.APPROVE_AND_CONFIRM)
     } else {
       setStage(BuyingStage.CONFIRM)

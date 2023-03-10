@@ -1,17 +1,18 @@
 import { Currency, CurrencyAmount, ETHER, Token, Trade } from '@pancakeswap/sdk'
+import { useTranslation } from 'contexts/Localization'
+import { useTradeExactIn, useTradeExactOut } from 'hooks/Trades'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import { useRouter } from 'next/router'
 import { ParsedUrlQuery } from 'querystring'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { useTradeExactIn, useTradeExactOut } from 'hooks/Trades'
-import { useRouter } from 'next/router'
-import { useTranslation } from 'contexts/Localization'
 import { isAddress } from 'utils'
-import { computeSlippageAdjustedAmounts } from 'utils/prices'
 import getLpAddress from 'utils/getLpAddress'
-import { getTokenAddress } from 'views/Swap/components/Chart/utils'
+import { computeSlippageAdjustedAmounts } from 'utils/prices'
 import tryParseAmount from 'utils/tryParseAmount'
+import { getTokenAddress } from 'views/Swap/components/Chart/utils'
 import { AppDispatch, AppState } from '../index'
+import { useUserSlippageTolerance } from '../user/hooks'
 import { useCurrencyBalances } from '../wallet/hooks'
 import {
   Field,
@@ -21,22 +22,21 @@ import {
   switchCurrencies,
   typeInput,
   updateDerivedPairData,
-  updatePairData,
+  updatePairData
 } from './actions'
-import { SwapState } from './reducer'
-import { useUserSlippageTolerance } from '../user/hooks'
+import { DEFAULT_INPUT_CURRENCY, DEFAULT_OUTPUT_CURRENCY } from './constants'
+import fetchDerivedPriceData from './fetch/fetchDerivedPriceData'
 import fetchPairPriceData from './fetch/fetchPairPriceData'
+import { pairHasEnoughLiquidity } from './fetch/utils'
 import {
   normalizeChartData,
   normalizeDerivedChartData,
   normalizeDerivedPairDataByActiveToken,
-  normalizePairDataByActiveToken,
+  normalizePairDataByActiveToken
 } from './normalizers'
-import { PairDataTimeWindowEnum } from './types'
+import { SwapState } from './reducer'
 import { derivedPairByDataIdSelector, pairByDataIdSelector } from './selectors'
-import { DEFAULT_INPUT_CURRENCY, DEFAULT_OUTPUT_CURRENCY } from './constants'
-import fetchDerivedPriceData from './fetch/fetchDerivedPriceData'
-import { pairHasEnoughLiquidity } from './fetch/utils'
+import { PairDataTimeWindowEnum } from './types'
 
 export function useSwapState(): AppState['swap'] {
   return useSelector<AppState, AppState['swap']>((state) => state.swap)
@@ -54,7 +54,7 @@ export function useSwapActionHandlers(): {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency instanceof Token ? currency.address : currency === ETHER ? 'ethf' : '',
+          currencyId: currency instanceof Token ? currency.address : currency === ETHER ? 'CORE' : '',
         }),
       )
     },
@@ -224,8 +224,8 @@ function parseCurrencyFromURLParameter(urlParam: any): string {
   if (typeof urlParam === 'string') {
     const valid = isAddress(urlParam)
     if (valid) return valid
-    if (urlParam.toUpperCase() === 'ethf') return 'ethf'
-    if (valid === false) return 'ethf'
+    if (urlParam.toUpperCase() === 'CORE') return 'CORE'
+    if (valid === false) return 'CORE'
   }
   return ''
 }

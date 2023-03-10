@@ -1,10 +1,10 @@
-import { Box, Flex, FlexProps, Link, ProfileAvatar, SubMenu, SubMenuItem, useModal, Text } from '@pancakeswap/uikit'
-import styled from 'styled-components'
-import { getEthfScanLink } from 'utils'
-import { PredictionUser } from 'state/types'
-import { useProfileForAddress } from 'state/profile/hooks'
-import truncateHash from 'utils/truncateHash'
+import { Box, Flex, FlexProps, Link, ProfileAvatar, SubMenu, SubMenuItem, Text, useModal } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
+import { useProfileForAddress } from 'state/profile/hooks'
+import { PredictionUser } from 'state/types'
+import styled from 'styled-components'
+import { getCOREScanLink } from 'utils'
+import truncateHash from 'utils/truncateHash'
 import WalletStatsModal from '../WalletStatsModal'
 
 interface ResultAvatarProps extends FlexProps {
@@ -55,8 +55,8 @@ const ResultAvatar: React.FC<ResultAvatarProps> = ({ user, ...props }) => {
       options={{ placement: 'bottom-start' }}
     >
       <SubMenuItem onClick={onPresentWalletStatsModal}>{t('View Stats')}</SubMenuItem>
-      <SubMenuItem as={Link} href={getEthfScanLink(user.id, 'address')} bold={false} color="text" external>
-        {t('View on ETHFScan')}
+      <SubMenuItem as={Link} href={getCOREScanLink(user.id, 'address')} bold={false} color="text" external>
+        {t('View on COREScan')}
       </SubMenuItem>
     </SubMenu>
   )

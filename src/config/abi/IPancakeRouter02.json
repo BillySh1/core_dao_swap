@@ -655,7 +655,7 @@
         "type": "uint256"
       }
     ],
-    "name": "swapETHForExactTokens",
+    "name": "swapCOREorExactTokens",
     "outputs": [
       {
         "internalType": "uint256[]",
@@ -689,7 +689,7 @@
         "type": "uint256"
       }
     ],
-    "name": "swapExactETHForTokens",
+    "name": "swapExactCOREorTokens",
     "outputs": [
       {
         "internalType": "uint256[]",
@@ -723,7 +723,7 @@
         "type": "uint256"
       }
     ],
-    "name": "swapExactETHForTokensSupportingFeeOnTransferTokens",
+    "name": "swapExactCOREorTokensSupportingFeeOnTransferTokens",
     "outputs": [],
     "stateMutability": "payable",
     "type": "function"

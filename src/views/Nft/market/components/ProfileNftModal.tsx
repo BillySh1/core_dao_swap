@@ -1,12 +1,12 @@
-import { InjectedModalProps, Modal, Flex, Text, Button, useModal, Link, Grid, LinkExternal } from '@pancakeswap/uikit'
-import useTheme from 'hooks/useTheme'
-import styled from 'styled-components'
-import { NftToken } from 'state/nftMarket/types'
+import { Button, Flex, Grid, InjectedModalProps, Link, LinkExternal, Modal, Text, useModal } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
-import { getEthfScanLinkForNft } from 'utils'
-import { HorizontalDivider, RoundedImage } from './BuySellModals/shared/styles'
-import EditProfileModal from '../Profile/components/EditProfileModal'
+import useTheme from 'hooks/useTheme'
+import { NftToken } from 'state/nftMarket/types'
+import styled from 'styled-components'
+import { getCOREScanLinkForNft } from 'utils'
 import { nftsBaseUrl, pancakeBunniesAddress } from '../constants'
+import EditProfileModal from '../Profile/components/EditProfileModal'
+import { HorizontalDivider, RoundedImage } from './BuySellModals/shared/styles'
 
 export const StyledModal = styled(Modal)`
   & > div:last-child {
@@ -61,8 +61,8 @@ const ProfileNftModal: React.FC<ProfileNftModalProps> = ({ nft, onDismiss, onSuc
               {t('View Item')}
             </Button>
             <HorizontalDivider />
-            <LinkExternal p="0px" height="16px" href={getEthfScanLinkForNft(nft.collectionAddress, nft.tokenId)}>
-              EthfScan
+            <LinkExternal p="0px" height="16px" href={getCOREScanLinkForNft(nft.collectionAddress, nft.tokenId)}>
+              COREScan
             </LinkExternal>
           </Flex>
         </Flex>

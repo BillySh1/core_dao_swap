@@ -1,12 +1,12 @@
 import { Box, Card, CardBody, CardHeader, Flex, Heading, LinkExternal, Text } from '@pancakeswap/uikit'
-import styled from 'styled-components'
+import { useTranslation } from 'contexts/Localization'
 import { format } from 'date-fns'
 import { Proposal } from 'state/types'
-import { useTranslation } from 'contexts/Localization'
-import { getEthfScanLink } from 'utils'
+import styled from 'styled-components'
+import { getCOREScanLink } from 'utils'
 import truncateHash from 'utils/truncateHash'
-import { IPFS_GATEWAY } from '../config'
 import { ProposalStateTag } from '../components/Proposals/tags'
+import { IPFS_GATEWAY } from '../config'
 
 interface DetailsProps {
   proposal: Proposal
@@ -39,13 +39,13 @@ const Details: React.FC<DetailsProps> = ({ proposal }) => {
         </Flex>
         <Flex alignItems="center" mb="8px">
           <Text color="textSubtle">{t('Creator')}</Text>
-          <LinkExternal href={getEthfScanLink(proposal.author, 'address')} ml="8px">
+          <LinkExternal href={getCOREScanLink(proposal.author, 'address')} ml="8px">
             {truncateHash(proposal.author)}
           </LinkExternal>
         </Flex>
         <Flex alignItems="center" mb="16px">
           <Text color="textSubtle">{t('Snapshot')}</Text>
-          <LinkExternal href={getEthfScanLink(proposal.snapshot, 'block')} ml="8px">
+          <LinkExternal href={getCOREScanLink(proposal.snapshot, 'block')} ml="8px">
             {proposal.snapshot}
           </LinkExternal>
         </Flex>

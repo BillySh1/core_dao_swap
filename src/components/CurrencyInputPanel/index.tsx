@@ -1,17 +1,14 @@
 import { Currency, Pair, Token } from '@pancakeswap/sdk'
-import { Button, ChevronDownIcon, Text, useModal, Flex, Box, MetamaskIcon, WhiteListIcon } from '@pancakeswap/uikit'
-import styled from 'styled-components'
-import { registerToken } from 'utils/wallet'
-import { isAddress } from 'utils'
+import { Box, Button, ChevronDownIcon, Flex, Text, useModal, WhiteListIcon } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
-import { WrappedTokenInfo } from 'state/types'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import styled from 'styled-components'
+import { isAddress } from 'utils'
 import { useCurrencyBalance } from '../../state/wallet/hooks'
-import CurrencySearchModal from '../SearchModal/CurrencySearchModal'
 import { CurrencyLogo, DoubleCurrencyLogo } from '../Logo'
+import CurrencySearchModal from '../SearchModal/CurrencySearchModal'
 
 import { Input as NumericalInput } from './NumericalInput'
-import { CopyButton } from '../CopyButton'
 
 const InputRow = styled.div<{ selected: boolean }>`
   display: flex;
@@ -131,7 +128,7 @@ export default function CurrencyInputPanel({
           </CurrencySelectButton>
         {
           // todo: to check the verified icon logic
-          ['RM','ETHF','FDAO'].includes(currency?.symbol) && <WhiteListIcon/>
+          ['RM','CORE','FDAO'].includes(currency?.symbol) && <WhiteListIcon/>
         }
         </Flex>
         {account && (

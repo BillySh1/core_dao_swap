@@ -1,12 +1,12 @@
+import { Link, Text } from '@pancakeswap/uikit'
+import { useTranslation } from 'contexts/Localization'
 import { useCallback } from 'react'
 import styled from 'styled-components'
-import { Text, Link } from '@pancakeswap/uikit'
 import { isAddress } from 'utils'
-import { useTranslation } from 'contexts/Localization'
-import useActiveWeb3React from '../../../hooks/useActiveWeb3React'
 import { AutoColumn } from '../../../components/Layout/Column'
 import { RowBetween } from '../../../components/Layout/Row'
-import { getEthfScanLink } from '../../../utils'
+import useActiveWeb3React from '../../../hooks/useActiveWeb3React'
+import { getCOREScanLink } from '../../../utils'
 
 const InputPanel = styled.div`
   display: flex;
@@ -102,8 +102,8 @@ export default function AddressInputPanel({
             <RowBetween>
               <Text>{t('Recipient')}</Text>
               {address && chainId && (
-                <Link external small href={getEthfScanLink(address, 'address', chainId)}>
-                  ({t('View on ETHFScan')})
+                <Link external small href={getCOREScanLink(address, 'address', chainId)}>
+                  ({t('View on COREScan')})
                 </Link>
               )}
             </RowBetween>

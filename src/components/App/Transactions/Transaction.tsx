@@ -1,8 +1,8 @@
-import styled from 'styled-components'
 import { CheckmarkIcon, CloseIcon, LinkExternal } from '@pancakeswap/uikit'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { getEthfScanLink } from 'utils'
 import { TransactionDetails } from 'state/transactions/reducer'
+import styled from 'styled-components'
+import { getCOREScanLink } from 'utils'
 import CircleLoader from '../../Loader/CircleLoader'
 
 const TransactionState = styled.div<{ pending: boolean; success?: boolean }>`
@@ -33,7 +33,7 @@ export default function Transaction({ tx }: { tx: TransactionDetails }) {
 
   return (
     <TransactionState pending={pending} success={success}>
-      <LinkExternal href={getEthfScanLink(tx.hash, 'transaction', chainId)}>{summary ?? tx.hash}</LinkExternal>
+      <LinkExternal href={getCOREScanLink(tx.hash, 'transaction', chainId)}>{summary ?? tx.hash}</LinkExternal>
       <IconWrapper pending={pending} success={success}>
         {pending ? <CircleLoader /> : success ? <CheckmarkIcon color="success" /> : <CloseIcon color="failure" />}
       </IconWrapper>

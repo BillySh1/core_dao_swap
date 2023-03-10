@@ -1,13 +1,13 @@
-import { useMemo } from 'react'
 import { Order } from '@gelatonetwork/limit-orders-lib'
 import { Currency, CurrencyAmount, Price, Token, TokenAmount } from '@pancakeswap/sdk'
-import { useCurrency } from 'hooks/Tokens'
 import useGelatoLimitOrdersLib from 'hooks/limitOrders/useGelatoLimitOrdersLib'
+import { useCurrency } from 'hooks/Tokens'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { getEthfScanLink } from 'utils'
+import { useMemo } from 'react'
 import { useIsTransactionPending } from 'state/transactions/hooks'
-import getPriceForOneToken from '../utils/getPriceForOneToken'
+import { getCOREScanLink } from 'utils'
 import { LimitOrderStatus } from '../types'
+import getPriceForOneToken from '../utils/getPriceForOneToken'
 
 export interface FormattedOrderData {
   inputToken: Currency | Token
@@ -93,9 +93,9 @@ const useFormattedOrderData = (order: Order): FormattedOrderData => {
     isSubmissionPending,
     isCancellationPending,
     bscScanUrls: {
-      created: order.createdTxHash ? getEthfScanLink(order.createdTxHash, 'transaction') : null,
-      executed: order.executedTxHash ? getEthfScanLink(order.executedTxHash, 'transaction') : null,
-      cancelled: order.cancelledTxHash ? getEthfScanLink(order.cancelledTxHash, 'transaction') : null,
+      created: order.createdTxHash ? getCOREScanLink(order.createdTxHash, 'transaction') : null,
+      executed: order.executedTxHash ? getCOREScanLink(order.executedTxHash, 'transaction') : null,
+      cancelled: order.cancelledTxHash ? getCOREScanLink(order.cancelledTxHash, 'transaction') : null,
     },
   }
 }

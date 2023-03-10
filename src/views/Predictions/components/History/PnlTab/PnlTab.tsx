@@ -1,14 +1,14 @@
-import styled from 'styled-components'
+import { Box, Button, Flex, Heading, Link, OpenNewIcon, Text } from '@pancakeswap/uikit'
 import { useWeb3React } from '@web3-react/core'
-import { Box, Flex, Heading, Text, Button, Link, OpenNewIcon } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
-import { getRoundResult, Result } from 'state/predictions/helpers'
-import { REWARD_RATE } from 'state/predictions/config'
-import { getEthfScanLink } from 'utils'
-import { multiplyPriceByAmount } from 'utils/prices'
 import { useBNBBusdPrice } from 'hooks/useBUSDPrice'
+import { REWARD_RATE } from 'state/predictions/config'
+import { getRoundResult, Result } from 'state/predictions/helpers'
 import { useGetCurrentEpoch } from 'state/predictions/hooks'
 import { Bet, BetPosition } from 'state/types'
+import styled from 'styled-components'
+import { getCOREScanLink } from 'utils'
+import { multiplyPriceByAmount } from 'utils/prices'
 import { formatBnb, getMultiplier, getNetPayout } from '../helpers'
 import PnlChart from './PnlChart'
 import SummaryRow from './SummaryRow'
@@ -184,7 +184,7 @@ const PnlTab: React.FC<PnlTabProps> = ({ hasBetHistory, bets }) => {
         <SummaryRow type="entered" summary={summary} bnbBusdPrice={bnbBusdPrice} />
 
         <Flex justifyContent="center" mt="24px">
-          <Link href={`${getEthfScanLink(account, 'address')}#internaltx`} mb="16px" external>
+          <Link href={`${getCOREScanLink(account, 'address')}#internaltx`} mb="16px" external>
             <Button mt="8px" width="100%">
               {t('View Reclaimed & Won')}
               <OpenNewIcon color="white" ml="4px" />

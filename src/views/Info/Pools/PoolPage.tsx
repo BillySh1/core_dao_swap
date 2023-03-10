@@ -13,7 +13,7 @@ import {
   Spinner,
   Text,
   useMatchBreakpoints,
-  useTooltip,
+  useTooltip
 } from '@pancakeswap/uikit'
 import Page from 'components/Layout/Page'
 import { NextLinkFromReactRouter } from 'components/NextLink'
@@ -22,13 +22,13 @@ import { useState } from 'react'
 import { usePoolChartData, usePoolDatas, usePoolTransactions } from 'state/info/hooks'
 import { useWatchlistPools } from 'state/user/hooks'
 import styled from 'styled-components'
-import { getEthfScanLink } from 'utils'
+import { getCOREScanLink } from 'utils'
+import { formatAmount } from 'utils/formatInfoNumbers'
 import { CurrencyLogo, DoubleCurrencyLogo } from 'views/Info/components/CurrencyLogo'
 import ChartCard from 'views/Info/components/InfoCharts/ChartCard'
 import TransactionTable from 'views/Info/components/InfoTables/TransactionsTable'
 import Percent from 'views/Info/components/Percent'
 import SaveIcon from 'views/Info/components/SaveIcon'
-import { formatAmount } from 'utils/formatInfoNumbers'
 
 const ContentLayout = styled.div`
   display: grid;
@@ -96,8 +96,8 @@ const PoolPage: React.FC<{ address: string }> = ({ address: routeAddress }) => {
               </Flex>
             </Breadcrumbs>
             <Flex justifyContent={[null, null, 'flex-end']} mt={['8px', '8px', 0]}>
-              <LinkExternal mr="8px" href={getEthfScanLink(address, 'address')}>
-                {t('View on ETHFScan')}
+              <LinkExternal mr="8px" href={getCOREScanLink(address, 'address')}>
+                {t('View on COREScan')}
               </LinkExternal>
               <SaveIcon fill={watchlistPools.includes(address)} onClick={() => addPoolToWatchlist(address)} />
             </Flex>

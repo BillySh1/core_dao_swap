@@ -1,15 +1,15 @@
-import { useRef, RefObject, useCallback, useState, useMemo } from 'react'
 import { Token } from '@pancakeswap/sdk'
-import { Text, Button, CloseIcon, IconButton, LinkExternal, Input, Link } from '@pancakeswap/uikit'
-import styled from 'styled-components'
+import { Button, CloseIcon, IconButton, Input, Link, LinkExternal, Text } from '@pancakeswap/uikit'
 import Row, { RowBetween, RowFixed } from 'components/Layout/Row'
+import { CurrencyLogo } from 'components/Logo'
+import { useTranslation } from 'contexts/Localization'
 import { useToken } from 'hooks/Tokens'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import { RefObject, useCallback, useMemo, useRef, useState } from 'react'
 import { useRemoveUserAddedToken } from 'state/user/hooks'
 import useUserAddedTokens from 'state/user/hooks/useUserAddedTokens'
-import { CurrencyLogo } from 'components/Logo'
-import { getEthfScanLink, isAddress } from 'utils'
-import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { useTranslation } from 'contexts/Localization'
+import styled from 'styled-components'
+import { getCOREScanLink, isAddress } from 'utils'
 import Column, { AutoColumn } from '../Layout/Column'
 import ImportRow from './ImportRow'
 import { CurrencyModalView } from './types'
@@ -73,7 +73,7 @@ export default function ManageTokens({
         <RowBetween key={token.address} width="100%">
           <RowFixed>
             <CurrencyLogo currency={token} size="20px" />
-            <Link external href={getEthfScanLink(token.address, 'address', chainId)} color="textSubtle" ml="10px">
+            <Link external href={getCOREScanLink(token.address, 'address', chainId)} color="textSubtle" ml="10px">
               {token.symbol}
             </Link>
           </RowFixed>
@@ -81,7 +81,7 @@ export default function ManageTokens({
             <IconButton variant="text" onClick={() => removeToken(chainId, token.address)}>
               <CloseIcon />
             </IconButton>
-            <LinkExternal href={getEthfScanLink(token.address, 'address', chainId)} />
+            <LinkExternal href={getCOREScanLink(token.address, 'address', chainId)} />
           </RowFixed>
         </RowBetween>
       ))

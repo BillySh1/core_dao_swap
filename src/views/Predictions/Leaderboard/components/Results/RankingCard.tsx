@@ -3,22 +3,17 @@ import {
   Card,
   CardBody,
   CardRibbon,
-  Flex,
-  ProfileAvatar,
-  LaurelLeftIcon,
+  Flex, LaurelLeftIcon,
   LaurelRightIcon,
-  Link,
-  Text,
-  SubMenu,
-  SubMenuItem,
-  useModal,
+  Link, ProfileAvatar, SubMenu,
+  SubMenuItem, Text, useModal
 } from '@pancakeswap/uikit'
-import { PredictionUser } from 'state/types'
-import { useProfileForAddress } from 'state/profile/hooks'
-import styled from 'styled-components'
-import { getEthfScanLink } from 'utils'
-import truncateHash from 'utils/truncateHash'
 import { useTranslation } from 'contexts/Localization'
+import { useProfileForAddress } from 'state/profile/hooks'
+import { PredictionUser } from 'state/types'
+import styled from 'styled-components'
+import { getCOREScanLink } from 'utils'
+import truncateHash from 'utils/truncateHash'
 import WalletStatsModal from '../WalletStatsModal'
 import { NetWinningsRow, Row } from './styles'
 
@@ -75,8 +70,8 @@ const RankingCard: React.FC<RankingCardProps> = ({ rank, user }) => {
             options={{ placement: 'bottom' }}
           >
             <SubMenuItem onClick={onPresentWalletStatsModal}>{t('View Stats')}</SubMenuItem>
-            <SubMenuItem as={Link} href={getEthfScanLink(user.id, 'address')} bold={false} color="text" external>
-              {t('View on ETHFScan')}
+            <SubMenuItem as={Link} href={getCOREScanLink(user.id, 'address')} bold={false} color="text" external>
+              {t('View on COREScan')}
             </SubMenuItem>
           </SubMenu>
         </Flex>

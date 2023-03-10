@@ -1,16 +1,16 @@
 // TODO PCS refactor ternaries
 /* eslint-disable no-nested-ternary */
-import { useCallback, useState, useMemo, useEffect, Fragment } from 'react'
-import styled from 'styled-components'
-import { formatDistanceToNowStrict } from 'date-fns'
-import { Text, Flex, Box, Radio, Skeleton, LinkExternal, ArrowForwardIcon, ArrowBackIcon } from '@pancakeswap/uikit'
-import { formatAmount } from 'utils/formatInfoNumbers'
-import { getEthfScanLink } from 'utils'
-import truncateHash from 'utils/truncateHash'
-import { Transaction, TransactionType } from 'state/info/types'
+import { ArrowBackIcon, ArrowForwardIcon, Box, Flex, LinkExternal, Radio, Skeleton, Text } from '@pancakeswap/uikit'
 import { ITEMS_PER_INFO_TABLE_PAGE } from 'config/constants/info'
 import { useTranslation } from 'contexts/Localization'
-import { ClickableColumnHeader, TableWrapper, PageButtons, Arrow, Break } from './shared'
+import { formatDistanceToNowStrict } from 'date-fns'
+import { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
+import { Transaction, TransactionType } from 'state/info/types'
+import styled from 'styled-components'
+import { getCOREScanLink } from 'utils'
+import { formatAmount } from 'utils/formatInfoNumbers'
+import truncateHash from 'utils/truncateHash'
+import { Arrow, Break, ClickableColumnHeader, PageButtons, TableWrapper } from './shared'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -101,7 +101,7 @@ const DataRow: React.FC<{ transaction: Transaction }> = ({ transaction }) => {
 
   return (
     <ResponsiveGrid>
-      <LinkExternal href={getEthfScanLink(transaction.hash, 'transaction')}>
+      <LinkExternal href={getCOREScanLink(transaction.hash, 'transaction')}>
         <Text>
           {transaction.type === TransactionType.MINT
             ? t('Add %token0% and %token1%', { token0: transaction.token0Symbol, token1: transaction.token1Symbol })
@@ -117,7 +117,7 @@ const DataRow: React.FC<{ transaction: Transaction }> = ({ transaction }) => {
       <Text>
         <Text>{`${formatAmount(abs1)} ${transaction.token1Symbol}`}</Text>
       </Text>
-      <LinkExternal href={getEthfScanLink(transaction.sender, 'address')}>
+      <LinkExternal href={getCOREScanLink(transaction.sender, 'address')}>
         {truncateHash(transaction.sender)}
       </LinkExternal>
       <Text>{formatDistanceToNowStrict(parseInt(transaction.timestamp, 10) * 1000)}</Text>

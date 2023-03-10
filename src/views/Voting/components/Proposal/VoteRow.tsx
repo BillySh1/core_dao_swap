@@ -1,8 +1,8 @@
-import { Flex, LinkExternal, Text, Tag, CheckmarkCircleIcon } from '@pancakeswap/uikit'
-import truncateHash from 'utils/truncateHash'
-import { getEthfScanLink } from 'utils'
+import { CheckmarkCircleIcon, Flex, LinkExternal, Tag, Text } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 import { Vote } from 'state/types'
+import { getCOREScanLink } from 'utils'
+import truncateHash from 'utils/truncateHash'
 import { IPFS_GATEWAY } from '../../config'
 import TextEllipsis from '../TextEllipsis'
 import Row, { AddressColumn, ChoiceColumn, VotingPowerColumn } from './Row'
@@ -27,7 +27,7 @@ const VoteRow: React.FC<VoteRowProps> = ({ vote, isVoter }) => {
     <Row>
       <AddressColumn>
         <Flex alignItems="center">
-          <LinkExternal href={getEthfScanLink(vote.voter, 'address')}>{truncateHash(vote.voter)}</LinkExternal>
+          <LinkExternal href={getCOREScanLink(vote.voter, 'address')}>{truncateHash(vote.voter)}</LinkExternal>
           {isVoter && (
             <Tag variant="success" outline ml="8px">
               <CheckmarkCircleIcon mr="4px" /> {t('Voted')}

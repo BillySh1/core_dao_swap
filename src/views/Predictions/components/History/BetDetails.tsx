@@ -1,9 +1,9 @@
-import styled from 'styled-components'
-import { Bet } from 'state/types'
+import { Flex, Heading, Link, Text } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
-import { getEthfScanLink } from 'utils'
-import { Flex, Text, Link, Heading } from '@pancakeswap/uikit'
 import { Result } from 'state/predictions/helpers'
+import { Bet } from 'state/types'
+import styled from 'styled-components'
+import { getCOREScanLink } from 'utils'
 import { PayoutRow, RoundResultHistory } from '../RoundResult'
 import BetResult from './BetResult'
 import { getMultiplier } from './helpers'
@@ -43,7 +43,7 @@ const BetDetails: React.FC<BetDetailsProps> = ({ bet, result }) => {
       {bet.round.lockBlock && (
         <Flex alignItems="center" justifyContent="space-between" mb="8px">
           <Text>{t('Opening Block')}</Text>
-          <Link href={getEthfScanLink(bet.round.lockBlock, 'block')} external>
+          <Link href={getCOREScanLink(bet.round.lockBlock, 'block')} external>
             {bet.round.lockBlock}
           </Link>
         </Flex>
@@ -51,7 +51,7 @@ const BetDetails: React.FC<BetDetailsProps> = ({ bet, result }) => {
       {bet.round.closeBlock && (
         <Flex alignItems="center" justifyContent="space-between">
           <Text>{t('Closing Block')}</Text>
-          <Link href={getEthfScanLink(bet.round.closeBlock, 'block')} external>
+          <Link href={getCOREScanLink(bet.round.closeBlock, 'block')} external>
             {bet.round.closeBlock}
           </Link>
         </Flex>

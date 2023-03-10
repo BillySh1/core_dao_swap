@@ -1,8 +1,8 @@
-import { TokenMarketData, Image } from 'state/nftMarket/types'
+import { Image, TokenMarketData } from 'state/nftMarket/types'
 
 export enum PaymentCurrency {
-  ETHF,
-  WETHF,
+  CORE,
+  WCORE,
 }
 
 export enum BuyingStage {

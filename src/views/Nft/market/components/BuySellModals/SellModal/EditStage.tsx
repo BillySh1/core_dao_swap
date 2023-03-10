@@ -1,8 +1,8 @@
-import { Flex, Grid, Text, Button, Link, LinkExternal, BinanceIcon } from '@pancakeswap/uikit'
+import { BinanceIcon, Button, Flex, Grid, Link, LinkExternal, Text } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
-import { nftsBaseUrl, pancakeBunniesAddress } from 'views/Nft/market/constants'
 import { NftToken } from 'state/nftMarket/types'
-import { getEthfScanLinkForNft } from 'utils'
+import { getCOREScanLinkForNft } from 'utils'
+import { nftsBaseUrl, pancakeBunniesAddress } from 'views/Nft/market/constants'
 import { Divider, HorizontalDivider, RoundedImage } from '../shared/styles'
 
 interface EditStageProps {
@@ -76,9 +76,9 @@ const EditStage: React.FC<EditStageProps> = ({
           <LinkExternal
             p="0px"
             height="16px"
-            href={getEthfScanLinkForNft(nftToSell.collectionAddress, nftToSell.tokenId)}
+            href={getCOREScanLinkForNft(nftToSell.collectionAddress, nftToSell.tokenId)}
           >
-            EthfScan
+            COREScan
           </LinkExternal>
         </Flex>
       </Flex>

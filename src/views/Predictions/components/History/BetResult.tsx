@@ -1,21 +1,21 @@
+import { BlockIcon, Box, Flex, Heading, InfoIcon, LinkExternal, PrizeIcon, Text, useTooltip } from '@pancakeswap/uikit'
 import { useWeb3React } from '@web3-react/core'
-import { Box, Flex, Heading, Text, PrizeIcon, BlockIcon, LinkExternal, useTooltip, InfoIcon } from '@pancakeswap/uikit'
-import styled from 'styled-components'
-import { useAppDispatch } from 'state'
 import { useTranslation } from 'contexts/Localization'
-import { REWARD_RATE } from 'state/predictions/config'
-import { Bet, BetPosition } from 'state/types'
+import { useBNBBusdPrice } from 'hooks/useBUSDPrice'
+import { useAppDispatch } from 'state'
 import { fetchLedgerData, markAsCollected } from 'state/predictions'
+import { REWARD_RATE } from 'state/predictions/config'
 import { Result } from 'state/predictions/helpers'
 import { useGetIsClaimable } from 'state/predictions/hooks'
-import { useBNBBusdPrice } from 'hooks/useBUSDPrice'
-import { getEthfScanLink } from 'utils'
+import { Bet, BetPosition } from 'state/types'
+import styled from 'styled-components'
+import { getCOREScanLink } from 'utils'
 import { multiplyPriceByAmount } from 'utils/prices'
 import useIsRefundable from '../../hooks/useIsRefundable'
-import { formatBnb, getNetPayout } from './helpers'
 import CollectWinningsButton from '../CollectWinningsButton'
 import PositionTag from '../PositionTag'
 import ReclaimPositionButton from '../ReclaimPositionButton'
+import { formatBnb, getNetPayout } from './helpers'
 
 interface BetResultProps {
   bet: Bet
@@ -132,8 +132,8 @@ const BetResult: React.FC<BetResultProps> = ({ bet, result }) => {
         )}
         {bet.claimed && bet.claimedHash && (
           <Flex justifyContent="center">
-            <LinkExternal href={getEthfScanLink(bet.claimedHash, 'transaction')} mb="16px">
-              {t('View on ETHFScan')}
+            <LinkExternal href={getCOREScanLink(bet.claimedHash, 'transaction')} mb="16px">
+              {t('View on COREScan')}
             </LinkExternal>
           </Flex>
         )}

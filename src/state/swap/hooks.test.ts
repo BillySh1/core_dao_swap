@@ -1,8 +1,8 @@
 /* eslint-disable no-var */
 /* eslint-disable vars-on-top */
 import { renderHook } from '@testing-library/react-hooks'
-import { parse } from 'querystring'
 import { useCurrency } from 'hooks/Tokens'
+import { parse } from 'querystring'
 import { createReduxWrapper } from 'testUtils'
 import { Field } from './actions'
 import { DEFAULT_OUTPUT_CURRENCY } from './constants'
@@ -10,16 +10,16 @@ import { queryParametersToSwapState, useDerivedSwapInfo, useSwapState } from './
 
 describe('hooks', () => {
   describe('#queryParametersToSwapState', () => {
-    test('ETHF to DAI', () => {
+    test('CORE to DAI', () => {
       expect(
         queryParametersToSwapState(
           parse(
-            'inputCurrency=ETHF&outputCurrency=0x6b175474e89094c44da98b954eedeac495271d0f&exactAmount=20.5&exactField=outPUT',
+            'inputCurrency=CORE&outputCurrency=0x6b175474e89094c44da98b954eedeac495271d0f&exactAmount=20.5&exactField=outPUT',
           ),
         ),
       ).toEqual({
         [Field.OUTPUT]: { currencyId: '0x6B175474E89094C44Da98b954EedeAC495271d0F' },
-        [Field.INPUT]: { currencyId: 'ETHF' },
+        [Field.INPUT]: { currencyId: 'CORE' },
         typedValue: '20.5',
         independentField: Field.OUTPUT,
         pairDataById: {},
@@ -28,10 +28,10 @@ describe('hooks', () => {
       })
     })
 
-    test('should return ETHF BUSD pair by default', () => {
+    test('should return CORE BUSD pair by default', () => {
       expect(queryParametersToSwapState(parse(''))).toEqual({
         [Field.OUTPUT]: { currencyId: DEFAULT_OUTPUT_CURRENCY },
-        [Field.INPUT]: { currencyId: 'ETHF' },
+        [Field.INPUT]: { currencyId: 'CORE' },
         typedValue: '',
         independentField: Field.INPUT,
         pairDataById: {},
@@ -40,10 +40,10 @@ describe('hooks', () => {
       })
     })
 
-    test('does not duplicate ETHF for invalid output token', () => {
+    test('does not duplicate CORE for invalid output token', () => {
       expect(queryParametersToSwapState(parse('outputCurrency=invalid'))).toEqual({
         [Field.INPUT]: { currencyId: '' },
-        [Field.OUTPUT]: { currencyId: 'ETHF' },
+        [Field.OUTPUT]: { currencyId: 'CORE' },
         typedValue: '',
         independentField: Field.INPUT,
         pairDataById: {},
@@ -52,9 +52,9 @@ describe('hooks', () => {
       })
     })
 
-    test('output ETHF only', () => {
+    test('output CORE only', () => {
       expect(queryParametersToSwapState(parse('outputCurrency=bnb&exactAmount=20.5'))).toEqual({
-        [Field.OUTPUT]: { currencyId: 'ETHF' },
+        [Field.OUTPUT]: { currencyId: 'CORE' },
         [Field.INPUT]: { currencyId: '' },
         typedValue: '20.5',
         independentField: Field.INPUT,
@@ -65,8 +65,8 @@ describe('hooks', () => {
     })
 
     test('invalid recipient', () => {
-      expect(queryParametersToSwapState(parse('outputCurrency=ETHF&exactAmount=20.5&recipient=abc'))).toEqual({
-        [Field.OUTPUT]: { currencyId: 'ETHF' },
+      expect(queryParametersToSwapState(parse('outputCurrency=CORE&exactAmount=20.5&recipient=abc'))).toEqual({
+        [Field.OUTPUT]: { currencyId: 'CORE' },
         [Field.INPUT]: { currencyId: '' },
         typedValue: '20.5',
         independentField: Field.INPUT,
@@ -79,10 +79,10 @@ describe('hooks', () => {
     test('valid recipient', () => {
       expect(
         queryParametersToSwapState(
-          parse('outputCurrency=ETHF&exactAmount=20.5&recipient=0x0fF2D1eFd7A57B7562b2bf27F3f37899dB27F4a5'),
+          parse('outputCurrency=CORE&exactAmount=20.5&recipient=0x0fF2D1eFd7A57B7562b2bf27F3f37899dB27F4a5'),
         ),
       ).toEqual({
-        [Field.OUTPUT]: { currencyId: 'ETHF' },
+        [Field.OUTPUT]: { currencyId: 'CORE' },
         [Field.INPUT]: { currencyId: '' },
         typedValue: '20.5',
         independentField: Field.INPUT,
@@ -150,8 +150,8 @@ describe('#useDerivedSwapInfo', () => {
         wrapper: createReduxWrapper({
           swap: {
             typedValue: '0.11',
-            [Field.INPUT]: { currencyId: 'ETHF' },
-            [Field.OUTPUT]: { currencyId: 'ETHF' },
+            [Field.INPUT]: { currencyId: 'CORE' },
+            [Field.OUTPUT]: { currencyId: 'CORE' },
           },
         }),
       },

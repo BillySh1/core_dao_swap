@@ -1,7 +1,7 @@
-import { Flex, Text, Button, ArrowUpIcon, LinkExternal } from '@pancakeswap/uikit'
+import { ArrowUpIcon, Button, Flex, LinkExternal, Text } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
-import { getEthfScanLink } from 'utils'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import { getCOREScanLink } from 'utils'
 import { Divider } from './styles'
 
 interface TransactionConfirmedProps {
@@ -17,7 +17,7 @@ const TransactionConfirmed: React.FC<TransactionConfirmedProps> = ({ txHash, onD
       <Flex p="16px" flexDirection="column" alignItems="center" justifyContent="space-between" height="150px">
         <ArrowUpIcon width="64px" height="64px" color="primary" />
         <Text bold>{t('Transaction Confirmed')}</Text>
-        <LinkExternal href={getEthfScanLink(txHash, 'transaction', chainId)}>{t('View on ETHFScan')}</LinkExternal>
+        <LinkExternal href={getCOREScanLink(txHash, 'transaction', chainId)}>{t('View on COREScan')}</LinkExternal>
       </Flex>
       <Divider />
       <Flex px="16px" pb="16px" justifyContent="center">

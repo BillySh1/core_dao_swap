@@ -1,5 +1,5 @@
 {
-  "name": "PancakeSwap Default List",
+  "name": "CoreDAOSwap Default List",
   "timestamp": "2022-01-26T11:45:09Z",
   "version": {
     "major": 4,
@@ -7,8 +7,8 @@
     "patch": 0
   },
   "tags": {},
-  "logoURI": "https://www.gate.io/images/coin_icon/64/ethf.png",
-  "keywords": ["memory", "default"],
+  "logoURI": "https://www.gate.io/images/coin_icon/64/core.png",
+  "keywords": ["coredao", "default"],
   "tokens": [
     {
       "name": "Wrapped CORE",
@@ -16,7 +16,7 @@
       "address": "0xfe2A9583dDD68065C49df63060e60C07dd12404f",
       "chainId": 1116,
       "decimals": 18,
-      "logoURI": "https://www.gate.io/images/coin_icon/64/ethf.png"
+      "logoURI": "https://www.gate.io/images/coin_icon/64/core.png"
     },
     {
       "name": "Tether USDT",

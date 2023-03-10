@@ -509,15 +509,15 @@ export default function RemoveLiquidity() {
                             currencyB === ETHER ? WETH[chainId].address : currencyIdB
                           }`}
                         >
-                          {t('Receive WETHF')}
+                          {t('Receive WCORE')}
                         </StyledInternalLink>
                       ) : oneCurrencyIsWBNB ? (
                         <StyledInternalLink
                           href={`/remove/${
-                            currencyA && currencyEquals(currencyA, WETH[chainId]) ? 'ETHF' : currencyIdA
-                          }/${currencyB && currencyEquals(currencyB, WETH[chainId]) ? 'ETHF' : currencyIdB}`}
+                            currencyA && currencyEquals(currencyA, WETH[chainId]) ? 'CORE' : currencyIdA
+                          }/${currencyB && currencyEquals(currencyB, WETH[chainId]) ? 'CORE' : currencyIdB}`}
                         >
-                          {t('Receive ETHF')}
+                          {t('Receive CORE')}
                         </StyledInternalLink>
                       ) : null}
                     </RowBetween>

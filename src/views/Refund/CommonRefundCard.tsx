@@ -1,5 +1,5 @@
-import { isAddress } from '@ethersproject/address'
 import { formatEther } from '@ethersproject/units'
+import { Button, Flex } from '@pancakeswap/uikit'
 import { useWeb3React } from '@web3-react/core'
 import { NOT_ON_SALE_SELLER } from 'config/constants'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
@@ -7,17 +7,8 @@ import useCatchTxError from 'hooks/useCatchTxError'
 import { useDonate, useDonate2 } from 'hooks/useContract'
 import { useSWRContract } from 'hooks/useSWRContract'
 import { useState } from 'react'
-import addresses from 'config/constants/contracts'
-import bep20Abi from '../../config/abi/erc20.json'
 import styled from 'styled-components'
 import { FDAOIcon, PresaleLink } from '../../../packages/uikit/src/components/Svg'
-import useToast from 'hooks/useToast'
-import { getContract } from 'utils'
-import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { getDonateAddress } from 'utils/addressHelpers'
-import { MaxUint256 } from '@ethersproject/constants'
-import { Button, Input, Flex } from '@pancakeswap/uikit'
-import { BigNumber } from '@ethersproject/bignumber'
 
 const Content = styled.div`
   background: #ffffff;
@@ -69,14 +60,14 @@ const DonateButton = styled(Button)`
 
 export default function CommonPresaleCard(props) {
   const { type = 0 } = props
-  const tokenName = type == 0 ? 'RM' : 'ETHF'
+  const tokenName = type == 0 ? 'RM' : 'CORE'
 
   const donateContract = type == 0 ? useDonate(type) : useDonate2(type)
   const { account } = useWeb3React()
   const { callWithGasPrice } = useCallWithGasPrice()
   const { fetchWithCatchTxError, loading: isLoading } = useCatchTxError()
   const [buyAmount, setBuyAmount] = useState(null)
-  const { data: price } = useSWRContract([donateContract, type == 0 ? 'priceRM' : 'priceETHF'])
+  const { data: price } = useSWRContract([donateContract, type == 0 ? 'priceRM' : 'priceCORE'])
   const { data: raised } = useSWRContract([donateContract, 'poolInfos', [type == 0 ? 1 : 2]])
   const { data: user } = useSWRContract([donateContract, 'getInfo', [account || NOT_ON_SALE_SELLER]])
   const { data: nowPhase } = useSWRContract([donateContract, 'nowPhase'])
@@ -91,7 +82,7 @@ export default function CommonPresaleCard(props) {
 
   const percentage = () => {
     if (raised && price) {
-      const m1 = Number(formatEther(type == 0 ? raised.raisedRM : raised.raisedETHF))
+      const m1 = Number(formatEther(type == 0 ? raised.raisedRM : raised.raisedCORE))
       const m2 = Number(formatEther(price))
       const m3 = Number(formatEther(raised.totalFdao))
 
@@ -122,7 +113,7 @@ export default function CommonPresaleCard(props) {
         <InfoItem>
           <div>Rasied</div>
           <div style={{ textAlign: 'right' }}>
-            {raised ? Number(formatEther(type == 0 ? raised.raisedRM : raised.raisedETHF)).toFixed(2) : 0} {tokenName}{' '}
+            {raised ? Number(formatEther(type == 0 ? raised.raisedRM : raised.raisedCORE)).toFixed(2) : 0} {tokenName}{' '}
             <br />({percentage()}%)
           </div>
         </InfoItem>

@@ -1,16 +1,16 @@
-import { Button, Flex, Box, Modal, Text, ChevronRightIcon, InjectedModalProps, Tag, Spinner } from '@pancakeswap/uikit'
+import { Order } from '@gelatonetwork/limit-orders-lib'
+import { Box, Button, ChevronRightIcon, Flex, InjectedModalProps, Modal, Spinner, Tag, Text } from '@pancakeswap/uikit'
+import { TransactionErrorContent, TransactionSubmittedContent } from 'components/TransactionConfirmationModal'
 import { useTranslation } from 'contexts/Localization'
+import useGelatoLimitOrdersHandlers from 'hooks/limitOrders/useGelatoLimitOrdersHandlers'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import useTheme from 'hooks/useTheme'
 import { memo, useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { FormattedOrderData } from 'views/LimitOrders/hooks/useFormattedOrderData'
-import useGelatoLimitOrdersHandlers from 'hooks/limitOrders/useGelatoLimitOrdersHandlers'
-import { Order } from '@gelatonetwork/limit-orders-lib'
-import { TransactionErrorContent, TransactionSubmittedContent } from 'components/TransactionConfirmationModal'
-import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import CurrencyFormat from './CurrencyFormat'
-import CellFormat from './CellFormat'
 import LimitOrderDisclaimer from '../LimitOrderDisclaimer'
+import CellFormat from './CellFormat'
+import CurrencyFormat from './CurrencyFormat'
 
 const InfoCardWrapper = styled.div`
   border-radius: 16px;
@@ -122,7 +122,7 @@ export const DetailLimitOrderModal: React.FC<DetailLimitOrderModalProps> = ({ on
         {isOpen ? (
           <>
             <Button variant="primary" mt="16px" as="a" external href={formattedOrder.bscScanUrls.created}>
-              {t('View on ETHFScan')}
+              {t('View on COREScan')}
             </Button>
             {!isSubmissionPending && (
               <Button variant="danger" mt="16px" onClick={onCancelOrder}>
@@ -132,17 +132,17 @@ export const DetailLimitOrderModal: React.FC<DetailLimitOrderModalProps> = ({ on
           </>
         ) : (
           <Button variant="primary" mt="16px" as="a" external href={formattedOrder.bscScanUrls.created}>
-            {t('View order creation on ETHFScan')}
+            {t('View order creation on COREScan')}
           </Button>
         )}
         {isCancelled && bscScanUrls.cancelled && (
           <Button variant="primary" mt="16px" as="a" external href={bscScanUrls.cancelled}>
-            {t('View order cancellation on ETHFScan')}
+            {t('View order cancellation on COREScan')}
           </Button>
         )}
         {isExecuted && bscScanUrls.executed && (
           <Button variant="primary" mt="16px" as="a" external href={bscScanUrls.executed}>
-            {t('View order execution on ETHFScan')}
+            {t('View order execution on COREScan')}
           </Button>
         )}
       </Flex>

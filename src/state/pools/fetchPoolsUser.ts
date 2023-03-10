@@ -1,16 +1,16 @@
-import poolsConfig from 'config/constants/pools'
-import sousChefABI from 'config/abi/sousChef.json'
-import erc20ABI from 'config/abi/erc20.json'
-import multicall from 'utils/multicall'
-import { getAddress } from 'utils/addressHelpers'
-import { simpleRpcProvider } from 'utils/providers'
 import BigNumber from 'bignumber.js'
+import erc20ABI from 'config/abi/erc20.json'
+import sousChefABI from 'config/abi/sousChef.json'
+import poolsConfig from 'config/constants/pools'
 import uniq from 'lodash/uniq'
+import { getAddress } from 'utils/addressHelpers'
+import multicall from 'utils/multicall'
+import { simpleRpcProvider } from 'utils/providers'
 
 // Pool 0, Cake / Cake is a different kind of contract (master chef)
 // BNB pools use the native BNB token (wrapping ? unwrapping is done at the contract level)
-const nonBnbPools = poolsConfig.filter((pool) => pool.stakingToken.symbol !== 'ETHF')
-const bnbPools = poolsConfig.filter((pool) => pool.stakingToken.symbol === 'ETHF')
+const nonBnbPools = poolsConfig.filter((pool) => pool.stakingToken.symbol !== 'CORE')
+const bnbPools = poolsConfig.filter((pool) => pool.stakingToken.symbol === 'CORE')
 const nonMasterPools = poolsConfig.filter((pool) => pool.sousId !== 0)
 
 export const fetchPoolsAllowance = async (account) => {

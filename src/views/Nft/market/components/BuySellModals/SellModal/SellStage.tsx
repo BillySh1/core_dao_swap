@@ -1,10 +1,10 @@
-import { Flex, Grid, Text, Button, Link, BinanceIcon, LinkExternal, useModal } from '@pancakeswap/uikit'
+import { BinanceIcon, Button, Flex, Grid, Link, LinkExternal, Text, useModal } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
-import { nftsBaseUrl, pancakeBunniesAddress } from 'views/Nft/market/constants'
 import { NftToken } from 'state/nftMarket/types'
-import { getEthfScanLinkForNft } from 'utils'
-import EditProfileModal from 'views/Nft/market/Profile/components/EditProfileModal'
 import { useProfile } from 'state/profile/hooks'
+import { getCOREScanLinkForNft } from 'utils'
+import { nftsBaseUrl, pancakeBunniesAddress } from 'views/Nft/market/constants'
+import EditProfileModal from 'views/Nft/market/Profile/components/EditProfileModal'
 import { Divider, HorizontalDivider, RoundedImage } from '../shared/styles'
 
 interface SellStageProps {
@@ -80,9 +80,9 @@ const SellStage: React.FC<SellStageProps> = ({
           <LinkExternal
             p="0px"
             height="16px"
-            href={getEthfScanLinkForNft(nftToSell.collectionAddress, nftToSell.tokenId)}
+            href={getCOREScanLinkForNft(nftToSell.collectionAddress, nftToSell.tokenId)}
           >
-            EthfScan
+            COREScan
           </LinkExternal>
         </Flex>
       </Flex>

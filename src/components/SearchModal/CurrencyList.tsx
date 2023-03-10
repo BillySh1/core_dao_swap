@@ -1,21 +1,21 @@
-import { CSSProperties, MutableRefObject, useCallback, useMemo } from 'react'
 import { Currency, CurrencyAmount, currencyEquals, ETHER, Token } from '@pancakeswap/sdk'
 import { Text, WhiteListIcon } from '@pancakeswap/uikit'
-import styled from 'styled-components'
-import { FixedSizeList } from 'react-window'
-import { wrappedCurrency } from 'utils/wrappedCurrency'
 import { LightGreyCard } from 'components/Card'
 import QuestionHelper from 'components/QuestionHelper'
 import { useTranslation } from 'contexts/Localization'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import { CSSProperties, MutableRefObject, useCallback, useMemo } from 'react'
+import { FixedSizeList } from 'react-window'
+import styled from 'styled-components'
+import { wrappedCurrency } from 'utils/wrappedCurrency'
+import { useIsUserAddedToken } from '../../hooks/Tokens'
 import { useCombinedActiveList } from '../../state/lists/hooks'
 import { useCurrencyBalance } from '../../state/wallet/hooks'
-import { useIsUserAddedToken } from '../../hooks/Tokens'
-import Column from '../Layout/Column'
-import { RowFixed, RowBetween } from '../Layout/Row'
-import { CurrencyLogo } from '../Logo'
-import CircleLoader from '../Loader/CircleLoader'
 import { isTokenOnList } from '../../utils'
+import Column from '../Layout/Column'
+import { RowBetween, RowFixed } from '../Layout/Row'
+import CircleLoader from '../Loader/CircleLoader'
+import { CurrencyLogo } from '../Logo'
 import ImportRow from './ImportRow'
 
 function currencyKey(currency: Currency): string {
@@ -88,7 +88,7 @@ function CurrencyRow({
       <CurrencyLogo currency={currency} size="24px" />
       <Column>
         <Text style={{ display: 'flex', alignItems: 'center' }} bold>
-          {currency.symbol} {['RM', 'ETHF', 'FDAO'].includes(currency.symbol) && <WhiteListIcon />}
+          {currency.symbol} {['RM', 'CORE', 'FDAO'].includes(currency.symbol) && <WhiteListIcon />}
         </Text>
         <Text color="textSubtle" small ellipsis maxWidth="200px">
           {!isOnSelectedList && customAdded && `${t('Added by user')} •`} {currency.name}

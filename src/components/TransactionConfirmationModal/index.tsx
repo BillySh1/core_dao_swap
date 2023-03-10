@@ -1,27 +1,17 @@
-import { useCallback } from 'react'
 import { ChainId, Currency, Token } from '@pancakeswap/sdk'
-import styled from 'styled-components'
 import {
-  Button,
-  Text,
-  ErrorIcon,
-  ArrowUpIcon,
-  MetamaskIcon,
-  Flex,
-  Box,
-  Link,
-  Spinner,
-  Modal,
-  InjectedModalProps,
+  ArrowUpIcon, Box, Button, ErrorIcon, Flex, InjectedModalProps, Link, MetamaskIcon, Modal, Spinner, Text
 } from '@pancakeswap/uikit'
-import { registerToken } from 'utils/wallet'
 import { useTranslation } from 'contexts/Localization'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { wrappedCurrency } from 'utils/wrappedCurrency'
+import { useCallback } from 'react'
 import { WrappedTokenInfo } from 'state/types'
-import { RowFixed } from '../Layout/Row'
+import styled from 'styled-components'
+import { registerToken } from 'utils/wallet'
+import { wrappedCurrency } from 'utils/wrappedCurrency'
+import { getCOREScanLink } from '../../utils'
 import { AutoColumn, ColumnCenter } from '../Layout/Column'
-import { getEthfScanLink } from '../../utils'
+import { RowFixed } from '../Layout/Row'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -82,8 +72,8 @@ export function TransactionSubmittedContent({
         <AutoColumn gap="12px" justify="center">
           <Text fontSize="20px">{t('Transaction Submitted')}</Text>
           {chainId && hash && (
-            <Link external small href={getEthfScanLink(hash, 'transaction', chainId)}>
-              {t('View on ETHFScan')}
+            <Link external small href={getCOREScanLink(hash, 'transaction', chainId)}>
+              {t('View on COREScan')}
             </Link>
           )}
           {currencyToAdd && library?.provider?.isMetaMask && (

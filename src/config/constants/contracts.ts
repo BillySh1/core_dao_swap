@@ -16,7 +16,7 @@ export default {
     1818: '',
   },
   multiCall: {
-    1116: '0xd325f0cfcf4c84d3769baead5854e33a6878c2ac',
+    1116: '0xD325f0cFCF4C84d3769bAeAD5854E33a6878C2AC',
     513101: '',
   },
   pancakeProfile: {
@@ -148,7 +148,7 @@ export default {
     1116: '0x905Cb815720A713EB8FA67FBe203fF80a141042d',
     513101: '0x905Cb815720A713EB8FA67FBe203fF80a141042d',
   },
-  donateETHF: {
+  donateCORE: {
     1116: '0x3e7D9Cc802E2b8c7AFc8dd85189F928761f504eE',
     513101: '0x3e7D9Cc802E2b8c7AFc8dd85189F928761f504eE',
   },

@@ -1,8 +1,8 @@
 import { BlockIcon, CheckmarkCircleIcon, Flex, Link, OpenNewIcon, RefreshIcon } from '@pancakeswap/uikit'
-import styled from 'styled-components'
-import { TransactionDetails } from 'state/transactions/reducer'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { getEthfScanLink } from 'utils'
+import { TransactionDetails } from 'state/transactions/reducer'
+import styled from 'styled-components'
+import { getCOREScanLink } from 'utils'
 
 interface TransactionRowProps {
   txn: TransactionDetails
@@ -51,7 +51,7 @@ const TransactionRow: React.FC<TransactionRowProps> = ({ txn }) => {
   }
 
   return (
-    <TxnLink href={getEthfScanLink(txn.hash, 'transaction', chainId)} external>
+    <TxnLink href={getCOREScanLink(txn.hash, 'transaction', chainId)} external>
       <TxnIcon>{renderIcon(txn)}</TxnIcon>
       <Summary>{txn.summary ?? txn.hash}</Summary>
       <TxnIcon>

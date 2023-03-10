@@ -1,12 +1,12 @@
+import { Button, ButtonMenu, ButtonMenuItem, Flex, Link, Message, Text } from '@pancakeswap/uikit'
 import { useWeb3React } from '@web3-react/core'
 import ConnectWalletButton from 'components/ConnectWalletButton'
-import { Flex, Text, Button, ButtonMenu, ButtonMenuItem, Message, Link } from '@pancakeswap/uikit'
+import { FetchStatus } from 'config/constants/types'
 import { useTranslation } from 'contexts/Localization'
 import { NftToken } from 'state/nftMarket/types'
-import { getEthfScanLinkForNft } from 'utils'
-import { FetchStatus } from 'config/constants/types'
+import { getCOREScanLinkForNft } from 'utils'
 import { Divider, RoundedImage } from '../shared/styles'
-import { BorderedBox, BnbAmountCell } from './styles'
+import { BnbAmountCell, BorderedBox } from './styles'
 import { PaymentCurrency } from './types'
 
 interface ReviewStageProps {
@@ -53,7 +53,7 @@ const ReviewStage: React.FC<ReviewStageProps> = ({
                 pt="2px"
                 external
                 variant="text"
-                href={getEthfScanLinkForNft(nftToBuy.collectionAddress, nftToBuy.tokenId)}
+                href={getCOREScanLinkForNft(nftToBuy.collectionAddress, nftToBuy.tokenId)}
               >
                 {nftToBuy.tokenId}
               </Button>
@@ -70,15 +70,15 @@ const ReviewStage: React.FC<ReviewStageProps> = ({
             scale="sm"
             variant="subtle"
           >
-            <ButtonMenuItem>ETHF</ButtonMenuItem>
-            <ButtonMenuItem>WETHF</ButtonMenuItem>
+            <ButtonMenuItem>CORE</ButtonMenuItem>
+            <ButtonMenuItem>WCORE</ButtonMenuItem>
           </ButtonMenu>
           <Text small color="textSubtle">
             {t('Total payment')}
           </Text>
           <BnbAmountCell bnbAmount={nftPrice} />
           <Text small color="textSubtle">
-            {t('%symbol% in wallet', { symbol: paymentCurrency === PaymentCurrency.ETHF ? 'ETHF' : 'WETHF' })}
+            {t('%symbol% in wallet', { symbol: paymentCurrency === PaymentCurrency.CORE ? 'CORE' : 'WCORE' })}
           </Text>
           {!account ? (
             <Flex justifySelf="flex-end">
@@ -96,14 +96,14 @@ const ReviewStage: React.FC<ReviewStageProps> = ({
           <Message p="8px" variant="danger">
             <Text>
               {t('Not enough %symbol% to purchase this NFT', {
-                symbol: paymentCurrency === PaymentCurrency.ETHF ? 'ETHF' : 'WETHF',
+                symbol: paymentCurrency === PaymentCurrency.CORE ? 'CORE' : 'WCORE',
               })}
             </Text>
           </Message>
         )}
         <Flex alignItems="center">
           <Text my="16px" mr="4px">
-            {t('Convert between ETHF and WETHF for free')}:
+            {t('Convert between CORE and WCORE for free')}:
           </Text>
           <Button
             as={Link}
@@ -111,7 +111,7 @@ const ReviewStage: React.FC<ReviewStageProps> = ({
             height="16px"
             external
             variant="text"
-            href="/swap?inputCurrency=ETHF&outputCurrency=0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c"
+            href="/swap?inputCurrency=CORE&outputCurrency=0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c"
           >
             {t('Convert')}
           </Button>
@@ -126,8 +126,8 @@ const ReviewStage: React.FC<ReviewStageProps> = ({
         >
           {t('Checkout')}
         </Button>
-        <Button as={Link} external style={{ width: '100%' }} href="/swap?outputCurrency=ETHF" variant="secondary">
-          {t('Get %symbol1% or %symbol2%', { symbol1: 'ETHF', symbol2: 'WETHF' })}
+        <Button as={Link} external style={{ width: '100%' }} href="/swap?outputCurrency=CORE" variant="secondary">
+          {t('Get %symbol1% or %symbol2%', { symbol1: 'CORE', symbol2: 'WCORE' })}
         </Button>
       </Flex>
     </>

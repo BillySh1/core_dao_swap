@@ -8,11 +8,11 @@ import { simpleRpcProvider } from 'utils/providers'
 
 // Addresses
 import {
-    getAddress, getAnniversaryAchievement, getBunnyFactoryAddress,
-    getBunnySpecialAddress, getBunnySpecialCakeVaultAddress, getBunnySpecialLotteryAddress, getBunnySpecialPredictionAddress, getBunnySpecialXmasAddress, getCakeVaultAddress, getChainlinkOracleAddress, getClaimRefundAddress, getDonate2Address, getDonateAddress, getDonateETHFAddress, getDonateRMAddress, getEasterNftAddress, getFactoryAddress, getFarmAuctionAddress, getFDAOClaimAddress, getFivePlusTwoAddress, getGalaxyNFTClaimingAddress, getLotteryV2Address,
-    getMasterChefAddress,
-    getMasterChefV1Address, getMulticallAddress, getNftMarketAddress,
-    getNftSaleAddress, getPancakeBunniesAddress, getPancakeProfileAddress, getPancakeSquadAddress, getPointCenterIfoAddress, getPredictionsAddress, getTimeLockerAddress, getTradingCompetitionAddress, getTradingCompetitionAddressMobox, getTradingCompetitionAddressV2, getWLDonateFAddress, getXENAddress
+  getAddress, getAnniversaryAchievement, getBunnyFactoryAddress,
+  getBunnySpecialAddress, getBunnySpecialCakeVaultAddress, getBunnySpecialLotteryAddress, getBunnySpecialPredictionAddress, getBunnySpecialXmasAddress, getCakeVaultAddress, getChainlinkOracleAddress, getClaimRefundAddress, getDonate2Address, getDonateAddress, getDonateCOREAddress, getDonateRMAddress, getEasterNftAddress, getFactoryAddress, getFarmAuctionAddress, getFDAOClaimAddress, getFivePlusTwoAddress, getGalaxyNFTClaimingAddress, getLotteryV2Address,
+  getMasterChefAddress,
+  getMasterChefV1Address, getMulticallAddress, getNftMarketAddress,
+  getNftSaleAddress, getPancakeBunniesAddress, getPancakeProfileAddress, getPancakeSquadAddress, getPointCenterIfoAddress, getPredictionsAddress, getTimeLockerAddress, getTradingCompetitionAddress, getTradingCompetitionAddressMobox, getTradingCompetitionAddressV2, getWLDonateFAddress, getXENAddress
 } from 'utils/addressHelpers'
 
 // ABI
@@ -63,8 +63,8 @@ import xenAbi from 'config/abi/xen.json'
 
 // Types
 import type {
-    FarmAuction,
-    Predictions
+  FarmAuction,
+  Predictions
 } from 'config/abi/types'
 
 export const getContract = (abi: any, address: string, signer?: Signer | Provider) => {
@@ -224,8 +224,8 @@ export const getDonateRMContract = (signer?: Signer | Provider) => {
   return getContract(donateAbi, getDonateRMAddress(), signer) as any
 }
 
-export const getDonateETHFContract = (signer?: Signer | Provider) => {
-  return getContract(donateAbi, getDonateETHFAddress(), signer) as any
+export const getDonateCOREContract = (signer?: Signer | Provider) => {
+  return getContract(donateAbi, getDonateCOREAddress(), signer) as any
 }
 
 

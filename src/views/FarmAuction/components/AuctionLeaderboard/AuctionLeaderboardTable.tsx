@@ -1,25 +1,17 @@
-import { useState } from 'react'
-import styled from 'styled-components'
-import BigNumber from 'bignumber.js'
 import {
-  Text,
-  Flex,
   Box,
-  BunnyPlaceholderIcon,
-  Skeleton,
-  Button,
-  useMatchBreakpoints,
-  useModal,
-  SubMenu,
-  SubMenuItem,
-  EllipsisIcon,
-  LinkExternal,
+  BunnyPlaceholderIcon, Button, EllipsisIcon, Flex, LinkExternal, Skeleton, SubMenu,
+  SubMenuItem, Text, useMatchBreakpoints,
+  useModal
 } from '@pancakeswap/uikit'
-import { getEthfScanLink } from 'utils'
-import { getBalanceNumber } from 'utils/formatBalance'
-import { useTranslation } from 'contexts/Localization'
-import { usePriceCakeBusd } from 'state/farms/hooks'
+import BigNumber from 'bignumber.js'
 import { Bidder } from 'config/constants/types'
+import { useTranslation } from 'contexts/Localization'
+import { useState } from 'react'
+import { usePriceCakeBusd } from 'state/farms/hooks'
+import styled from 'styled-components'
+import { getCOREScanLink } from 'utils'
+import { getBalanceNumber } from 'utils/formatBalance'
 import WhitelistedBiddersModal from '../WhitelistedBiddersModal'
 
 const LeaderboardContainer = styled.div`
@@ -99,7 +91,7 @@ const LeaderboardRow: React.FC<LeaderboardRowProps> = ({ bidder, cakePriceBusd, 
             </SubMenuItem>
           )}
           {account && (
-            <SubMenuItem as={LinkExternal} href={getEthfScanLink(account, 'address')} bold={false} color="text">
+            <SubMenuItem as={LinkExternal} href={getCOREScanLink(account, 'address')} bold={false} color="text">
               {t('Bidder Address')}
             </SubMenuItem>
           )}
