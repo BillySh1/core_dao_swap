@@ -1,6 +1,6 @@
 {
-  "short_name": "MemorySwap",
-  "name": "MemorySwap",
+  "short_name": "CoreDAOSwap",
+  "name": "CoreDAOSwap",
   "description": "Farm CDAO with Memrory LP Tokens",
   "homepage_url": "http://www.CDAOswap.xyz",
   "start_url": ".",

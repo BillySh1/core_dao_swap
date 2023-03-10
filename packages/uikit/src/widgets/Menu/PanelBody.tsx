@@ -1,12 +1,12 @@
+import { useRouter } from "next/router";
 import React from "react";
 import styled from "styled-components";
 import { SvgProps } from "../../components/Svg";
-import * as IconModule from "./icons";
 import Accordion from "./Accordion";
-import { MenuEntry, LinkLabel } from "./MenuEntry";
+import * as IconModule from "./icons";
+import { LinkLabel, MenuEntry } from "./MenuEntry";
 import MenuLink from "./MenuLink";
 import { PanelProps, PushedProps } from "./types";
-import { useRouter } from "next/router";
 
 interface Props extends PanelProps, PushedProps {
   isMobile: boolean;
@@ -65,7 +65,7 @@ const PanelBody: React.FC<Props> = ({ isPushed, pushNav, isMobile, links }) => {
           >
             <MenuLink href={entry.href}>
               {iconElement}
-              <LinkLabel style={{ fontWeight: 500 }} isPushed={isPushed}>
+              <LinkLabel style={{ fontWeight: 500, marginLeft: 24 }} isPushed={isPushed}>
                 {entry.label}
               </LinkLabel>
             </MenuLink>

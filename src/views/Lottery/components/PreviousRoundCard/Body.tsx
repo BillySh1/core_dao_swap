@@ -1,25 +1,15 @@
-import styled from 'styled-components'
 import {
-  CardBody,
-  Heading,
-  Flex,
-  Skeleton,
-  Text,
   Box,
-  Button,
-  useModal,
-  CardRibbon,
-  useMatchBreakpoints,
-  BunnyPlaceholderIcon,
+  Button, CardBody, CardRibbon, Flex, Heading, Skeleton,
+  Text, useMatchBreakpoints, useModal
 } from '@pancakeswap/uikit'
-import { LotteryRound } from 'state/types'
-import { useGetUserLotteriesGraphData, useLottery } from 'state/lottery/hooks'
 import { LotteryStatus } from 'config/constants/types'
 import { useTranslation } from 'contexts/Localization'
-import WinningNumbers from '../WinningNumbers'
+import { useGetUserLotteriesGraphData, useLottery } from 'state/lottery/hooks'
+import { LotteryRound } from 'state/types'
+import styled from 'styled-components'
 import ViewTicketsModal from '../ViewTicketsModal'
-import Logo from 'components/Logo/Logo'
-import LogoWithText from '../../../../../packages/uikit/src/components/Svg/Icons/LogoWithText'
+import WinningNumbers from '../WinningNumbers'
 
 const StyledCardBody = styled(CardBody)`
   position: relative;
@@ -107,7 +97,7 @@ const PreviousRoundCardBody: React.FC<{ lotteryNodeData: LotteryRound; lotteryId
             <>
               <Flex flexDirection="column" alignItems="center" width={['240px', null, null, '480px']}>
                 <Text mb="8px">{t('Please specify Round')}</Text>
-                <Text mb="8px">{t('MemorySwap Lottery')}</Text>
+                <Text mb="8px">{t('CoreDAOSwap Lottery')}</Text>
               </Flex>
             </>
           )}

@@ -1,43 +1,43 @@
-import { useCallback, useEffect, useState } from 'react'
 import { BigNumber } from '@ethersproject/bignumber'
 import { TransactionResponse } from '@ethersproject/providers'
 import { Currency, currencyEquals, ETHER, TokenAmount, WETH } from '@pancakeswap/sdk'
-import { Button, Text, AddIcon, CardBody, Message, useModal } from '@pancakeswap/uikit'
-import { logError } from 'utils/sentry'
-import { useIsTransactionUnsupported } from 'hooks/Trades'
-import { useTranslation } from 'contexts/Localization'
+import { AddIcon, Button, CardBody, Message, Text, useModal } from '@pancakeswap/uikit'
 import UnsupportedCurrencyFooter from 'components/UnsupportedCurrencyFooter'
-import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { useDispatch } from 'react-redux'
-import { useRouter } from 'next/router'
 import { CHAIN_ID } from 'config/constants/networks'
-import { AppDispatch } from '../../state'
+import { useTranslation } from 'contexts/Localization'
+import { useIsTransactionUnsupported } from 'hooks/Trades'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { logError } from 'utils/sentry'
+import { AppBody, AppHeader } from '../../components/App'
 import { LightCard } from '../../components/Card'
-import { AutoColumn, ColumnCenter } from '../../components/Layout/Column'
-import CurrencyInputPanel from '../../components/CurrencyInputPanel'
-import { AppHeader, AppBody } from '../../components/App'
-import { MinimalPositionCard } from '../../components/PositionCard'
-import { RowBetween } from '../../components/Layout/Row'
 import ConnectWalletButton from '../../components/ConnectWalletButton'
+import CurrencyInputPanel from '../../components/CurrencyInputPanel'
+import { AutoColumn, ColumnCenter } from '../../components/Layout/Column'
+import { RowBetween } from '../../components/Layout/Row'
+import { MinimalPositionCard } from '../../components/PositionCard'
+import { AppDispatch } from '../../state'
 
 import { ROUTER_ADDRESS } from '../../config/constants'
-import { PairState } from '../../hooks/usePairs'
 import { useCurrency } from '../../hooks/Tokens'
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
+import { PairState } from '../../hooks/usePairs'
 import useTransactionDeadline from '../../hooks/useTransactionDeadline'
 import { Field, resetMintState } from '../../state/mint/actions'
 import { useDerivedMintInfo, useMintActionHandlers, useMintState } from '../../state/mint/hooks'
 
+import Dots from '../../components/Loader/Dots'
 import { useTransactionAdder } from '../../state/transactions/hooks'
 import { useGasPrice, useIsExpertMode, useUserSlippageTolerance } from '../../state/user/hooks'
 import { calculateGasMargin, calculateSlippageAmount, getRouterContract } from '../../utils'
+import { currencyId } from '../../utils/currencyId'
 import { maxAmountSpend } from '../../utils/maxAmountSpend'
 import { wrappedCurrency } from '../../utils/wrappedCurrency'
-import Dots from '../../components/Loader/Dots'
-import { currencyId } from '../../utils/currencyId'
-import PoolPriceBar from './PoolPriceBar'
 import Page from '../Page'
 import ConfirmAddLiquidityModal from '../Swap/components/ConfirmAddLiquidityModal'
+import PoolPriceBar from './PoolPriceBar'
 
 export default function AddLiquidity() {
   const router = useRouter()
@@ -206,7 +206,7 @@ export default function AddLiquidity() {
           attemptingTxn: false,
           liquidityErrorMessage:
             err && err.code !== 4001
-              ? `This token is not in the MemorySwap whitelist and cannot add liquidity, please contact us. \n Thanks for using MemorySwap`
+              ? `This token is not in the CoreDAOSwap whitelist and cannot add liquidity, please contact us. \n Thanks for using CoreDAOSwap`
               : undefined,
           txHash: undefined,
         })

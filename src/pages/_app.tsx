@@ -51,17 +51,17 @@ function MyApp(props: AppProps) {
         />
         <meta
           name="description"
-          content="Cheaper and faster than Uniswap? Discover MemorySwap, the leading DEX on ethf Smart Chain (ethf) with the best farms in DeFi and a lottery for CDAO."
+          content="Cheaper and faster than Uniswap? Discover CoreDAOSwap, the leading DEX on ethf Smart Chain (ethf) with the best farms in DeFi and a lottery for CDAO."
         />
         <meta name="theme-color" content="#1FC7D4" />
         {/* <meta name="twitter:image" content="https://pancakeswap.finance/images/hero.png" /> */}
         <meta
           name="twitter:description"
-          content="MemorySwap---DEX 2.0"
+          content="CoreDAOSwap---DEX 2.0"
         />
         {/* <meta name="twitter:card" content="summary_large_image" /> */}
-        <meta name="twitter:title" content="MemorySwap - A next evolution DeFi exchange on ethf Smart Chain (ethf)" />
-        <title>MemorySwap</title>
+        <meta name="twitter:title" content="CoreDAOSwap - A next evolution DeFi exchange on ethf Smart Chain (ethf)" />
+        <title>CoreDAOSwap</title>
       </Head>
       <Providers store={store}>
         <Blocklist>

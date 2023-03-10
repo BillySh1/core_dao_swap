@@ -1,48 +1,25 @@
 import { ChainId, Pair, Token } from '@pancakeswap/sdk'
-import { differenceInDays } from 'date-fns'
-import flatMap from 'lodash/flatMap'
+import { BASES_TO_TRACK_LIQUIDITY_FOR, PINNED_PAIRS } from 'config/constants'
 import farms from 'config/constants/farms'
+import { CHAIN_ID } from 'config/constants/networks'
+import { differenceInDays } from 'date-fns'
+import { useOfficialsAndUserAddedTokens } from 'hooks/Tokens'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import flatMap from 'lodash/flatMap'
 import { useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { CHAIN_ID } from 'config/constants/networks'
-import { BASES_TO_TRACK_LIQUIDITY_FOR, PINNED_PAIRS } from 'config/constants'
-import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { useOfficialsAndUserAddedTokens } from 'hooks/Tokens'
 import { AppDispatch, AppState } from '../../index'
+import { GAS_PRICE_GWEI } from '../../types'
 import {
   addSerializedPair,
-  addSerializedToken,
-  FarmStakedOnly,
-  muteAudio,
+  addSerializedToken, addWatchlistPool, addWatchlistToken, ChartViewMode, FarmStakedOnly, hidePhishingWarningBanner, muteAudio,
   removeSerializedToken,
-  SerializedPair,
-  unmuteAudio,
-  updateUserDeadline,
-  updateUserExpertMode,
-  updateUserFarmStakedOnly,
-  updateUserSingleHopOnly,
-  updateUserSlippageTolerance,
-  updateGasPrice,
-  addWatchlistToken,
-  addWatchlistPool,
-  updateUserPoolStakedOnly,
-  updateUserPoolsViewMode,
-  ViewMode,
-  updateUserFarmsViewMode,
-  updateUserPredictionChartDisclaimerShow,
-  updateUserPredictionChainlinkChartDisclaimerShow,
-  updateUserPredictionAcceptedRisk,
-  updateUserUsernameVisibility,
-  updateUserExpertModeAcknowledgementShow,
-  hidePhishingWarningBanner,
-  setIsExchangeChartDisplayed,
-  ChartViewMode,
-  setChartViewMode,
-  setSubgraphHealthIndicatorDisplayed,
-  updateUserLimitOrderAcceptedWarning,
+  SerializedPair, setChartViewMode, setIsExchangeChartDisplayed, setSubgraphHealthIndicatorDisplayed, unmuteAudio, updateGasPrice, updateUserDeadline,
+  updateUserExpertMode, updateUserExpertModeAcknowledgementShow, updateUserFarmStakedOnly, updateUserFarmsViewMode, updateUserLimitOrderAcceptedWarning, updateUserPoolStakedOnly,
+  updateUserPoolsViewMode, updateUserPredictionAcceptedRisk, updateUserPredictionChainlinkChartDisclaimerShow, updateUserPredictionChartDisclaimerShow, updateUserSingleHopOnly,
+  updateUserSlippageTolerance, updateUserUsernameVisibility, ViewMode
 } from '../actions'
 import { deserializeToken, serializeToken } from './helpers'
-import { GAS_PRICE_GWEI } from '../../types'
 
 export function useAudioModeManager(): [boolean, () => void] {
   const dispatch = useDispatch<AppDispatch>()
@@ -430,7 +407,7 @@ export function usePairAdder(): (pair: Pair) => void {
  * @param tokenB the other token
  */
 export function toV2LiquidityToken([tokenA, tokenB]: [Token, Token]): Token {
-  return new Token(tokenA.chainId, Pair.getAddress(tokenA, tokenB), 18, 'MemorySwap LPs', 'MemorySwap LPs')
+  return new Token(tokenA.chainId, Pair.getAddress(tokenA, tokenB), 18, 'CoreDAOSwap LPs', 'CoreDAOSwap LPs')
 }
 
 /**

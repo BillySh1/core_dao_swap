@@ -1,45 +1,44 @@
+import { BigNumber } from '@ethersproject/bignumber'
+import { splitSignature } from '@ethersproject/bytes'
+import { TransactionResponse } from '@ethersproject/providers'
+import { Currency, currencyEquals, ETHER, Percent, WETH } from '@pancakeswap/sdk'
+import { AddIcon, ArrowDownIcon, Box, Button, CardBody, Flex, Slider, Text, useModal } from '@pancakeswap/uikit'
+import { CHAIN_ID } from 'config/constants/networks'
+import { useTranslation } from 'contexts/Localization'
+import useToast from 'hooks/useToast'
+import { useRouter } from 'next/router'
 import { useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
-import { splitSignature } from '@ethersproject/bytes'
-import { Contract } from '@ethersproject/contracts'
-import { TransactionResponse } from '@ethersproject/providers'
-import { useRouter } from 'next/router'
-import useToast from 'hooks/useToast'
-import { Currency, currencyEquals, ETHER, Percent, WETH } from '@pancakeswap/sdk'
-import { Button, Text, AddIcon, ArrowDownIcon, CardBody, Slider, Box, Flex, useModal } from '@pancakeswap/uikit'
-import { BigNumber } from '@ethersproject/bignumber'
-import { useTranslation } from 'contexts/Localization'
-import { CHAIN_ID } from 'config/constants/networks'
-import { AutoColumn, ColumnCenter } from '../../components/Layout/Column'
-import CurrencyInputPanel from '../../components/CurrencyInputPanel'
-import { MinimalPositionCard } from '../../components/PositionCard'
-import { AppHeader, AppBody } from '../../components/App'
-import { RowBetween } from '../../components/Layout/Row'
-import ConnectWalletButton from '../../components/ConnectWalletButton'
+import { AppBody, AppHeader } from '../../components/App'
 import { LightGreyCard } from '../../components/Card'
+import ConnectWalletButton from '../../components/ConnectWalletButton'
+import CurrencyInputPanel from '../../components/CurrencyInputPanel'
+import { AutoColumn, ColumnCenter } from '../../components/Layout/Column'
+import { RowBetween } from '../../components/Layout/Row'
+import { MinimalPositionCard } from '../../components/PositionCard'
 
 import { CurrencyLogo } from '../../components/Logo'
 import { ROUTER_ADDRESS } from '../../config/constants'
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import { useCurrency } from '../../hooks/Tokens'
+import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import { usePairContract } from '../../hooks/useContract'
 import useTransactionDeadline from '../../hooks/useTransactionDeadline'
 
-import { useTransactionAdder } from '../../state/transactions/hooks'
 import StyledInternalLink from '../../components/Links'
+import Dots from '../../components/Loader/Dots'
+import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'
+import useDebouncedChangeHandler from '../../hooks/useDebouncedChangeHandler'
+import { useBurnActionHandlers, useBurnState, useDerivedBurnInfo } from '../../state/burn/hooks'
+import { useTransactionAdder } from '../../state/transactions/hooks'
 import { calculateGasMargin, calculateSlippageAmount, getRouterContract } from '../../utils'
 import { currencyId } from '../../utils/currencyId'
-import useDebouncedChangeHandler from '../../hooks/useDebouncedChangeHandler'
 import { wrappedCurrency } from '../../utils/wrappedCurrency'
-import { useApproveCallback, ApprovalState } from '../../hooks/useApproveCallback'
-import Dots from '../../components/Loader/Dots'
-import { useBurnActionHandlers, useDerivedBurnInfo, useBurnState } from '../../state/burn/hooks'
 
 import { Field } from '../../state/burn/actions'
 import { useGasPrice, useUserSlippageTolerance } from '../../state/user/hooks'
+import { logError } from '../../utils/sentry'
 import Page from '../Page'
 import ConfirmLiquidityModal from '../Swap/components/ConfirmRemoveLiquidityModal'
-import { logError } from '../../utils/sentry'
 
 const BorderCard = styled.div`
   border: solid 1px ${({ theme }) => theme.colors.cardBorder};
@@ -129,7 +128,7 @@ export default function RemoveLiquidity() {
     ]
     const domain = {
       // todo: check the name the same with that in the contract
-      name: 'MemorySwap LPs',
+      name: 'CoreDAOSwap LPs',
       version: '1',
       chainId,
       verifyingContract: pair.liquidityToken.address,

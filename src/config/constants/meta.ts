@@ -2,9 +2,9 @@ import { ContextApi } from 'contexts/Localization/types'
 import { PageMeta } from './types'
 
 export const DEFAULT_META: PageMeta = {
-  title: 'MemorySwap',
+  title: 'CoreDAOSwap',
   description:
-    'MemorySwap---DEX 2.0',
+    'CoreDAOSwap---DEX 2.0',
   image: '/hero.jpg',
 }
 
@@ -33,110 +33,110 @@ export const getCustomMeta = (path: string, t: ContextApi['t']): PageMeta => {
   switch (basePath) {
     case '/':
       return {
-        title: `${t('Home')} | MemorySwap`,
+        title: `${t('Home')} | CoreDAOSwap`,
       }
     case '/swap':
       return {
-        title: `${t('Exchange')} | MemorySwap`,
+        title: `${t('Exchange')} | CoreDAOSwap`,
       }
     case '/add':
       return {
-        title: `${t('Add Liquidity')} | MemorySwap`,
+        title: `${t('Add Liquidity')} | CoreDAOSwap`,
       }
     case '/remove':
       return {
-        title: `${t('Remove Liquidity')} | MemorySwap`,
+        title: `${t('Remove Liquidity')} | CoreDAOSwap`,
       }
     case '/liquidity':
       return {
-        title: `${t('Liquidity')} | MemorySwap`,
+        title: `${t('Liquidity')} | CoreDAOSwap`,
       }
     case '/find':
       return {
-        title: `${t('Import Pool')} | MemorySwap`,
+        title: `${t('Import Pool')} | CoreDAOSwap`,
       }
     case '/competition':
       return {
-        title: `${t('Trading Battle')} | MemorySwap`,
+        title: `${t('Trading Battle')} | CoreDAOSwap`,
       }
     case '/prediction':
       return {
-        title: `${t('Prediction')} | MemorySwap`,
+        title: `${t('Prediction')} | CoreDAOSwap`,
       }
     case '/prediction/leaderboard':
       return {
-        title: `${t('Leaderboard')} | MemorySwap`,
+        title: `${t('Leaderboard')} | CoreDAOSwap`,
       }
     case '/farms':
       return {
-        title: `${t('Farms')} | MemorySwap`,
+        title: `${t('Farms')} | CoreDAOSwap`,
       }
     case '/farms/auction':
       return {
-        title: `${t('Farm Auctions')} | MemorySwap`,
+        title: `${t('Farm Auctions')} | CoreDAOSwap`,
       }
     case '/pools':
       return {
-        title: `${t('Pools')} | MemorySwap`,
+        title: `${t('Pools')} | CoreDAOSwap`,
       }
     case '/lottery':
       return {
-        title: `${t('Lottery')} | MemorySwap`,
+        title: `${t('Lottery')} | CoreDAOSwap`,
       }
     case '/ifo':
       return {
-        title: `${t('Initial Farm Offering')} | MemorySwap`,
+        title: `${t('Initial Farm Offering')} | CoreDAOSwap`,
       }
     case '/teams':
       return {
-        title: `${t('Leaderboard')} | MemorySwap`,
+        title: `${t('Leaderboard')} | CoreDAOSwap`,
       }
     case '/voting':
       return {
-        title: `${t('Voting')} | MemorySwap`,
+        title: `${t('Voting')} | CoreDAOSwap`,
       }
     case '/voting/proposal':
       return {
-        title: `${t('Proposals')} | MemorySwap`,
+        title: `${t('Proposals')} | CoreDAOSwap`,
       }
     case '/voting/proposal/create':
       return {
-        title: `${t('Make a Proposal')} | MemorySwap`,
+        title: `${t('Make a Proposal')} | CoreDAOSwap`,
       }
     case '/info':
       return {
-        title: `${t('Overview')} | MemorySwap Info & Analytics`,
-        description: 'View statistics for MemorySwap exchanges.',
+        title: `${t('Overview')} | CoreDAOSwap Info & Analytics`,
+        description: 'View statistics for CoreDAOSwap exchanges.',
       }
     case '/info/pools':
       return {
-        title: `${t('Pools')} | MemorySwap Info & Analytics`,
-        description: 'View statistics for MemorySwap exchanges.',
+        title: `${t('Pools')} | CoreDAOSwap Info & Analytics`,
+        description: 'View statistics for CoreDAOSwap exchanges.',
       }
     case '/info/tokens':
       return {
-        title: `${t('Tokens')} | MemorySwap Info & Analytics`,
-        description: 'View statistics for MemorySwap exchanges.',
+        title: `${t('Tokens')} | CoreDAOSwap Info & Analytics`,
+        description: 'View statistics for CoreDAOSwap exchanges.',
       }
     case '/nfts':
       return {
-        title: `${t('Overview')} | MemorySwap`,
+        title: `${t('Overview')} | CoreDAOSwap`,
       }
     case '/nfts/collections':
       return {
-        title: `${t('Collections')} | MemorySwap`,
+        title: `${t('Collections')} | CoreDAOSwap`,
       }
     case '/nfts/activity':
       return {
-        title: `${t('Activity')} | MemorySwap`,
+        title: `${t('Activity')} | CoreDAOSwap`,
       }
     case '/nfts/profile':
       return {
-        title: `${t('Profile')} | MemorySwap`,
+        title: `${t('Profile')} | CoreDAOSwap`,
       }
     case '/pancake-squad':
       return {
-        title: `${t('Pancake Squad')} | MemorySwap`,
+        title: `${t('Pancake Squad')} | CoreDAOSwap`,
       }
     default:
       return null
