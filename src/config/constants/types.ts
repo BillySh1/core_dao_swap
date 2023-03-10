@@ -1,5 +1,5 @@
-import BigNumber from 'bignumber.js'
 import { Token } from '@pancakeswap/sdk'
+import BigNumber from 'bignumber.js'
 
 export type TranslatableText =
   | string
@@ -11,7 +11,7 @@ export type TranslatableText =
     }
 export interface Address {
   1818?: string
-  513100: string
+  1116: string
 }
 
 export interface SerializedToken {

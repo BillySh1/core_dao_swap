@@ -1,22 +1,20 @@
-import { Button, CardBody, CardFooter, Flex, Input } from '@pancakeswap/uikit'
+import { MaxUint256 } from '@ethersproject/constants'
+import { parseEther } from '@ethersproject/units'
+import { Token } from '@pancakeswap/sdk'
+import { Button, CardBody, CardFooter, Flex } from '@pancakeswap/uikit'
 import { useWeb3React } from '@web3-react/core'
-import { BigNumber } from '@ethersproject/bignumber'
 import { AppBody, AppHeader } from 'components/App'
+import NumericalInput from 'components/CurrencyInputPanel/NumericalInput'
 import { useTranslation } from 'contexts/Localization'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import useCatchTxError from 'hooks/useCatchTxError'
-import { useERC20, useFDAOClaim, useXen } from 'hooks/useContract'
-import useToast from 'hooks/useToast'
-import { useCallback, useState } from 'react'
-import styled from 'styled-components'
-import Page from 'views/Page'
-import { useCurrencyBalance } from 'state/wallet/hooks'
-import NumericalInput from 'components/CurrencyInputPanel/NumericalInput'
-import { Token } from '@pancakeswap/sdk'
-import { maxAmountSpend } from 'utils/maxAmountSpend'
-import { MaxUint256 } from '@ethersproject/constants'
+import { useERC20, useFDAOClaim } from 'hooks/useContract'
 import { useSWRContract } from 'hooks/useSWRContract'
-import { parseEther } from '@ethersproject/units'
+import { useCallback, useState } from 'react'
+import { useCurrencyBalance } from 'state/wallet/hooks'
+import styled from 'styled-components'
+import { maxAmountSpend } from 'utils/maxAmountSpend'
+import Page from 'views/Page'
 const Body = styled(CardBody)`
   background-color: ${({ theme }) => theme.colors.backgroundAlt2};
 `
@@ -78,8 +76,8 @@ export default function FDAOExchange() {
   const [isApproved, setIsApproved] = useState(false)
   const { fetchWithCatchTxError, loading: isLoading } = useCatchTxError()
   const oldfdaoC = useERC20(oldFDAO)
-  const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, new Token(513100, oldFDAO, 18, 'FDAO'))
-  const newFDAOBalance = useCurrencyBalance(account ?? undefined, new Token(513100, newFDAO, 18, 'FDAO'))
+  const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, new Token(1116, oldFDAO, 18, 'FDAO'))
+  const newFDAOBalance = useCurrencyBalance(account ?? undefined, new Token(1116, newFDAO, 18, 'FDAO'))
   const { data: canClaim } = useSWRContract([FDAOClaimContract, 'canClaim'])
 
   const handleClaim = async () => {
