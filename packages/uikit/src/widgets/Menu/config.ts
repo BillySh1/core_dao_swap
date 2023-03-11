@@ -28,14 +28,14 @@ export const links = (t: any) => [
     items: [
       {
         label: t("Market"),
-        href: "/market",
+        href: "/swap",
       },
     ],
   },
   {
     label: t("DAO"),
     icon: "NftIcon",
-    href: "/dao",
+    href: "/swap",
   },
   // {
   //   label: t("IDO"),
@@ -48,19 +48,19 @@ export const links = (t: any) => [
     items: [
       {
         label: t("Overview"),
-        href: "/overview",
+        href: "/swap",
       },
       {
         label: t("Tokens"),
-        href: "/tokens",
+        href: "/swap",
       },
       {
         label: t("Pairs"),
-        href: "/pairs",
+        href: "/swap",
       },
       {
         label: t("Accounts"),
-        href: "/accounts",
+        href: "/swap",
       },
     ],
   },
@@ -70,11 +70,11 @@ export const links = (t: any) => [
     items: [
       {
         label: t("Github"),
-        href: "/github",
+        href: "/swap",
       },
       {
         label: t("Docs"),
-        href: "https://docs.memorylabs.cloud",
+        href: "/swap",
       },
     ],
   },

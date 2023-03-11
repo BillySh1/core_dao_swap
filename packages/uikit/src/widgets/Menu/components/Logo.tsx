@@ -1,7 +1,8 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import Flex from "../../../components/Box/Flex";
-import { HamburgerCloseIcon } from "../icons";
+import { useMatchBreakpoints } from "../../../hooks";
+import { HamburgerCloseIcon, HamburgerIcon } from "../icons";
 import MenuButton from "./MenuButton";
 
 interface Props {
@@ -55,10 +56,12 @@ const Logo: React.FC<Props> = ({ isDark, href, isPushed, togglePush }) => {
   //   </>
   // );
 
+  const { isMobile } = useMatchBreakpoints();
+
   return (
     <Flex>
       <MenuButton aria-label="Toggle menu" onClick={togglePush} mr="24px">
-        <HamburgerCloseIcon width="24px" color="textSubtle" />
+        {isMobile ? <HamburgerIcon width="24px" /> : <HamburgerCloseIcon width="24px" />}
       </MenuButton>
       {/* {isAbsoluteUrl ? (
         <StyledLink as="a" href={href} aria-label="Pancake home page">

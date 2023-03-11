@@ -1,45 +1,36 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import styled from 'styled-components'
 import { CurrencyAmount, JSBI, Token, Trade } from '@pancakeswap/sdk'
 import {
-  Button,
-  Text,
   ArrowDownIcon,
+  ArrowUpDownIcon,
   Box,
-  useModal,
+  Button,
   Flex,
   IconButton,
-  useMatchBreakpoints,
-  ArrowUpDownIcon,
   Skeleton,
+  Text,
+  useMatchBreakpoints,
+  useModal
 } from '@pancakeswap/uikit'
-import { useIsTransactionUnsupported } from 'hooks/Trades'
 import UnsupportedCurrencyFooter from 'components/UnsupportedCurrencyFooter'
-import { useRouter } from 'next/router'
 import { useTranslation } from 'contexts/Localization'
-import { EXCHANGE_DOCS_URLS } from 'config/constants'
+import { useIsTransactionUnsupported } from 'hooks/Trades'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import styled from 'styled-components'
 import { maxAmountSpend } from 'utils/maxAmountSpend'
 import { computeTradePriceBreakdown, warningSeverity } from 'utils/prices'
 import shouldShowSwapWarning from 'utils/shouldShowSwapWarning'
-import useRefreshBlockNumberID from './hooks/useRefreshBlockNumber'
-import AddressInputPanel from './components/AddressInputPanel'
-import { GreyCard } from '../../components/Card'
-import Column, { AutoColumn } from '../../components/Layout/Column'
-import ConfirmSwapModal from './components/ConfirmSwapModal'
-import CurrencyInputPanel from '../../components/CurrencyInputPanel'
-import { AutoRow, RowBetween } from '../../components/Layout/Row'
-import AdvancedSwapDetailsDropdown from './components/AdvancedSwapDetailsDropdown'
-import confirmPriceImpactWithoutFee from './components/confirmPriceImpactWithoutFee'
-import { ArrowWrapper, SwapCallbackError, Wrapper } from './components/styleds'
-import TradePrice from './components/TradePrice'
-import ImportTokenWarningModal from './components/ImportTokenWarningModal'
-import ProgressSteps from './components/ProgressSteps'
 import { AppBody } from '../../components/App'
-import ConnectWalletButton from '../../components/ConnectWalletButton'
+import { GreyCard } from '../../components/Card'
 import CardNav from '../../components/CardNav'
-import {TxMining} from '../../components/TxMining'
+import ConnectWalletButton from '../../components/ConnectWalletButton'
+import CurrencyInputPanel from '../../components/CurrencyInputPanel'
+import Column, { AutoColumn } from '../../components/Layout/Column'
+import { AutoRow, RowBetween } from '../../components/Layout/Row'
+import CircleLoader from '../../components/Loader/CircleLoader'
+import { TxMining } from '../../components/TxMining'
+import { useAllTokens, useCurrency } from '../../hooks/Tokens'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
-import { useCurrency, useAllTokens } from '../../hooks/Tokens'
 import { ApprovalState, useApproveCallbackFromTrade } from '../../hooks/useApproveCallback'
 import { useSwapCallback } from '../../hooks/useSwapCallback'
 import useWrapCallback, { WrapType } from '../../hooks/useWrapCallback'
@@ -47,22 +38,29 @@ import { Field } from '../../state/swap/actions'
 import {
   useDefaultsFromURLSearch,
   useDerivedSwapInfo,
-  useSwapActionHandlers,
-  useSwapState,
   useSingleTokenSwapInfo,
+  useSwapActionHandlers,
+  useSwapState
 } from '../../state/swap/hooks'
 import {
-  useExpertModeManager,
-  useUserSlippageTolerance,
-  useUserSingleHopOnly,
   useExchangeChartManager,
+  useExpertModeManager,
+  useUserSingleHopOnly,
+  useUserSlippageTolerance
 } from '../../state/user/hooks'
-import CircleLoader from '../../components/Loader/CircleLoader'
 import Page from '../Page'
-import SwapWarningModal from './components/SwapWarningModal'
-import PriceChartContainer from './components/Chart/PriceChartContainer'
-import { StyledInputCurrencyWrapper, StyledSwapContainer } from './styles'
+import AddressInputPanel from './components/AddressInputPanel'
+import AdvancedSwapDetailsDropdown from './components/AdvancedSwapDetailsDropdown'
+import confirmPriceImpactWithoutFee from './components/confirmPriceImpactWithoutFee'
+import ConfirmSwapModal from './components/ConfirmSwapModal'
 import CurrencyInputHeader from './components/CurrencyInputHeader'
+import ImportTokenWarningModal from './components/ImportTokenWarningModal'
+import ProgressSteps from './components/ProgressSteps'
+import { ArrowWrapper, SwapCallbackError, Wrapper } from './components/styleds'
+import SwapWarningModal from './components/SwapWarningModal'
+import TradePrice from './components/TradePrice'
+import useRefreshBlockNumberID from './hooks/useRefreshBlockNumber'
+import { StyledInputCurrencyWrapper, StyledSwapContainer } from './styles'
 
 const Label = styled(Text)`
   font-size: 12px;
@@ -88,10 +86,15 @@ const SwitchIconButton = styled(IconButton)`
   }
 `
 const BackgroundWrapper = styled(Page)`
-  background-image: ${({ theme }) => (theme.isDark ? `url('/images/bg/dark.png')` : `url('/images/bg/light.png')`)};
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  ${({ theme }) => theme.mediaQueries.xs} {
+    background-image: url('/images/menu/mobile_bg.png');
+  }
+  ${({ theme }) => theme.mediaQueries.md} {
+    background-image: url('/images/bg/light.png');
+  }
 `
 
 export default function Swap() {
@@ -373,7 +376,7 @@ export default function Swap() {
   return (
     <BackgroundWrapper removePadding={isChartExpanded} hideFooterOnDesktop={isChartExpanded}>
       <CardNav />
-      <TxMining isMobile={isMobile}/>
+      <TxMining isMobile={isMobile} />
       <Flex width="100%" justifyContent="center" position="relative">
         <Flex flexDirection="column">
           <StyledSwapContainer $isChartExpanded={isChartExpanded}>
